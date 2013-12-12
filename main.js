@@ -11,6 +11,14 @@ var generation = 0;
 var $generation = null;
 var arena = buildArena(CELLS_X, CELLS_Y);
 var context = null;
+var redraw = null;
+
+var $play = null;
+var $stop = null;
+var $prev = null;
+var $next = null;
+var $title = null;
+var $gamefield = null;
 
 var PLAYABLE = {
 	x: 24,
@@ -24,35 +32,31 @@ var goal = {};
 $(function() {
 	console.log("DOM Ready");
 
-	var $play = $('#button-play');
-	var $stop = $('#button-stop');
-	var $prev = $('#button-level-prev');
-	var $next = $('#button-level-next');
+	$play = $('#button-play');
+	$stop = $('#button-stop');
+	$prev = $('#button-level-prev');
+	$next = $('#button-level-next');
 
-	var $title = $('#title');
-	$generation = $('#generation');
-	var $gamefield = $('#gamefield');
+	$title = $('#title span');
+	$generation = $('#generation span');
+	$gamefield = $('#gamefield');
 
 	var gamefield = document.getElementById('gamefield');
 	context = gamefield.getContext('2d');
-	var redraw = null;
 
 	console.log("Gamefield Cells: " + CELLS_X + ", " + CELLS_Y);
 
-
-	// Game Stuff
-	
 	goal = {
 		x: 50,
 		y: 50,
 	};
 
 	// Quick lil' glider
-	arena[10][20] = true;
-	arena[11][20] = true;
-	arena[12][20] = true;
-	arena[12][19] = true;
-	arena[11][18] = true;
+	arena[30][30] = true;
+	arena[31][30] = true;
+	arena[32][30] = true;
+	arena[32][29] = true;
+	arena[31][28] = true;
 
 	drawArena(); // First Draw
 
@@ -62,7 +66,7 @@ $(function() {
 		$play.attr('disabled', true);
 
 		drawArena();
-		redraw = setInterval(animate, 1000);
+		redraw = setInterval(animate, 200);
 	});
 
 	$stop.on('click', function() {
@@ -108,12 +112,14 @@ function drawArena() {
 			if (goal.x == x && goal.y == y) {
 				context.fillStyle = "rgb(0,127,255)";
 				if (arena[y][x]) {
-					alert("you won!");
+					$('#gamefield-wrapper').addClass('won');
+					$next.attr('disabled', false);
+					clearTimeout(redraw); 
 				}
 			} else if (arena[y][x]) {
 				context.fillStyle = "rgb(0,0,0)";
 			} else {
-				context.fillStyle = "rgba(255,255,255,0.9)";
+				context.fillStyle = "rgb(255,255,255)";
 			}
 			context.fillRect(x * TILE_WIDTH, y * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
 		}
@@ -148,22 +154,19 @@ function animate() {
 
 function updateCellState(x, y, new_arena) {
 	var cell_state = arena[y][x];
-	if (cell_state) console.log("Cell " + x + ", " + y + " is alive!");
 	var living_neighbors = 0;
 
 	for (var mod_x = -1; mod_x <= 1; mod_x++) {
 		for (var mod_y = -1; mod_y <= 1; mod_y++) {
 			if (x + mod_x >= 0 && x + mod_x < CELLS_X && // Is this X coordinate outside of the array?
 				y + mod_y >= 0 && y + mod_y < CELLS_Y && // Is this Y coordinate outside of the array?
-				//(!(mod_y == 0 && mod_x == 0)) && // Not looking at self but neighbor
+				(!(mod_y == 0 && mod_x == 0)) && // Not looking at self but neighbor
 				arena[y + mod_y][x + mod_x]) { // Is this cell alive?
 
 			   living_neighbors++;
 		   }
 		}
 	}
-
-	if (living_neighbors) console.log("Cell " + x + ", " + y + " has " + living_neighbors + " neighbors.");
 
 	if (cell_state) { // Cell is alive
 		if (living_neighbors < 2) { // Under-Population

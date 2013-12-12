@@ -2,8 +2,11 @@
 	outline: 4px solid orange;
 	cursor: crosshair;
 }
-.gamefield-wrapper {
+#gamefield-wrapper {
 	padding: 4px;
+}
+#gamefield-wrapper.won #gamefield {
+	outline-color: lime;
 }
 #buttons {
 	margin-bottom: 8px;
