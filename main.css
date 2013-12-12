@@ -11,3 +11,14 @@
 #buttons {
 	margin-bottom: 8px;
 }
+#buttons, #gamefield-wrapper {
+	user-select: none;
+	-webkit-user-select: none;
+}
+#console {
+	background-color: #000;
+	color: #fff;
+	padding: 4px;
+	font-family: consolas, "courier new";
+	margin-top: 8px;
+}

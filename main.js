@@ -1,4 +1,4 @@
-console.log("main.js loaded");
+log("main.js loaded");
 
 var GAMEFIELD_WIDTH = 512;
 var GAMEFIELD_HEIGHT = 512;
@@ -30,7 +30,7 @@ var PLAYABLE = {
 var goal = {};
 
 $(function() {
-	console.log("DOM Ready");
+	log("DOM Ready");
 
 	$play = $('#button-play');
 	$stop = $('#button-stop');
@@ -44,7 +44,7 @@ $(function() {
 	var gamefield = document.getElementById('gamefield');
 	context = gamefield.getContext('2d');
 
-	console.log("Gamefield Cells: " + CELLS_X + ", " + CELLS_Y);
+	log("Gamefield Cells: [" + CELLS_X + ", " + CELLS_Y + "]");
 
 	goal = {
 		x: 50,
@@ -58,25 +58,32 @@ $(function() {
 	arena[32][29] = true;
 	arena[31][28] = true;
 
+	arena[36][37] = true;
+	arena[35][36] = true;
+	arena[37][36] = true;
+	arena[36][35] = true;
+
 	drawArena(); // First Draw
 
 	$play.on('click', function() {
-		console.log('play!');
 		$stop.attr('disabled', false);
 		$play.attr('disabled', true);
 
 		drawArena();
-		redraw = setInterval(animate, 200);
+		redraw = setInterval(animate, 150);
 	});
 
 	$stop.on('click', function() {
-		console.log('stop!');
 		$play.attr('disabled', false);
 		$stop.attr('disabled', true);
 
 		generation = 0;
 		$generation.html(generation);
 		clearTimeout(redraw); 
+	});
+
+	$next.on('click', function() {
+		log("Feature not-yet implemented :'(");
 	});
 
 	$gamefield.on('click', function(event) {
@@ -87,6 +94,9 @@ $(function() {
 
 		if (tile.x >= PLAYABLE.x && tile.y >= PLAYABLE.y && tile.x < PLAYABLE.x + PLAYABLE.width && tile.y < PLAYABLE.x + PLAYABLE.height) {
 			arena[tile.y][tile.x] = !arena[tile.y][tile.x];
+			log("Toggled [" + tile.x + ", " + tile.y + "].");
+		} else {
+			log("Position [" + tile.x + ", " + tile.y + "] is outside of the playable zone.");
 		}
 
 		drawArena();
@@ -114,7 +124,8 @@ function drawArena() {
 				if (arena[y][x]) {
 					$('#gamefield-wrapper').addClass('won');
 					$next.attr('disabled', false);
-					clearTimeout(redraw); 
+					//clearTimeout(redraw); 
+					log("Game won in " + generation + " generations!");
 				}
 			} else if (arena[y][x]) {
 				context.fillStyle = "rgb(0,0,0)";
@@ -137,8 +148,6 @@ function drawArena() {
 function animate() {
 	generation++;
 	$generation.html(generation);
-
-	console.log('frame');
 
 	var new_arena = buildArena(CELLS_X, CELLS_Y);
 
@@ -183,4 +192,8 @@ function updateCellState(x, y, new_arena) {
 			new_arena[y][x] = false;
 		}
 	}
+}
+
+function log(msg) {
+	$('#console').text(msg);
 }
