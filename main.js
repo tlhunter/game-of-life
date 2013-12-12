@@ -47,8 +47,8 @@ $(function() {
 	log("Gamefield Cells: [" + CELLS_X + ", " + CELLS_Y + "]");
 
 	goal = {
-		x: 50,
-		y: 50,
+		x: Math.floor(Math.random() * CELLS_X),
+		y: Math.floor(Math.random() * CELLS_Y),
 	};
 
 	// Quick lil' glider
