@@ -7,12 +7,19 @@ var TILE_HEIGHT = 8;
 var CELLS_X = GAMEFIELD_WIDTH / TILE_WIDTH;
 var CELLS_Y = GAMEFIELD_HEIGHT / TILE_HEIGHT;
 
+var generation = 0;
+var $generation = null;
+var arena = buildArena(CELLS_X, CELLS_Y);
+var context = null;
+
 var PLAYABLE = {
 	x: 24,
 	y: 24,
 	width: 16,
 	height: 16,
 };
+
+var goal = {};
 
 $(function() {
 	console.log("DOM Ready");
@@ -23,15 +30,15 @@ $(function() {
 	var $next = $('#button-level-next');
 
 	var $title = $('#title');
-	var $generation = $('#generation');
+	$generation = $('#generation');
 	var $gamefield = $('#gamefield');
 
 	var gamefield = document.getElementById('gamefield');
-	var context = gamefield.getContext('2d');
+	context = gamefield.getContext('2d');
+	var redraw = null;
 
 	console.log("Gamefield Cells: " + CELLS_X + ", " + CELLS_Y);
 
-	var arena = buildArena(CELLS_X, CELLS_Y);
 
 	// Game Stuff
 	
@@ -47,18 +54,25 @@ $(function() {
 	arena[12][19] = true;
 	arena[11][18] = true;
 
-	drawArena(context, arena, PLAYABLE, goal); // First Draw
+	drawArena(); // First Draw
 
 	$play.on('click', function() {
 		console.log('play!');
 		$stop.attr('disabled', false);
 		$play.attr('disabled', true);
+
+		drawArena();
+		redraw = setInterval(animate, 1000);
 	});
 
 	$stop.on('click', function() {
 		console.log('stop!');
 		$play.attr('disabled', false);
 		$stop.attr('disabled', true);
+
+		generation = 0;
+		$generation.html(generation);
+		clearTimeout(redraw); 
 	});
 
 	$gamefield.on('click', function(event) {
@@ -71,24 +85,24 @@ $(function() {
 			arena[tile.y][tile.x] = !arena[tile.y][tile.x];
 		}
 
-		drawArena(context, arena, PLAYABLE, goal); // First Draw
+		drawArena();
 	});
 });
 
 function buildArena(constraint_x, constraint_y) {
-	var arena = [];
+	var new_arena = [];
 
 	for (var y = 0; y < constraint_y; y++) {
-		arena[y] = [];
+		new_arena[y] = [];
 		for (var x = 0; x < constraint_x; x++) {
-			arena[y][x] = false;
+			new_arena[y][x] = false;
 		}
 	}
 
-	return arena;
+	return new_arena;
 }
 
-function drawArena(context, arena, playable, goal) {
+function drawArena() {
 	for (var y = 0; y < CELLS_Y; y++) {
 		for (var x = 0; x < CELLS_X; x++) {
 			if (goal.x == x && goal.y == y) {
@@ -99,17 +113,71 @@ function drawArena(context, arena, playable, goal) {
 			} else if (arena[y][x]) {
 				context.fillStyle = "rgb(0,0,0)";
 			} else {
-				context.fillStyle = "rgb(255,255,255)";
+				context.fillStyle = "rgba(255,255,255,0.9)";
 			}
 			context.fillRect(x * TILE_WIDTH, y * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
 		}
 	}
 
-	context.fillStyle = "rgba(0,0,0, 0.1)";
+	context.fillStyle = "rgba(255,127,0, 0.1)";
 	context.fillRect(
-		playable.x * TILE_WIDTH,
-		playable.y * TILE_HEIGHT,
-		playable.width * TILE_WIDTH,
-		playable.height * TILE_HEIGHT
+		PLAYABLE.x * TILE_WIDTH,
+		PLAYABLE.y * TILE_HEIGHT,
+		PLAYABLE.width * TILE_WIDTH,
+		PLAYABLE.height * TILE_HEIGHT
 	);
+}
+
+function animate() {
+	generation++;
+	$generation.html(generation);
+
+	console.log('frame');
+
+	var new_arena = buildArena(CELLS_X, CELLS_Y);
+
+	for (var y = 0; y < CELLS_Y; y++) {
+		for (var x = 0; x < CELLS_X; x++) {
+			updateCellState(x, y, new_arena);
+		}
+	}
+
+	arena = new_arena;
+	drawArena();
+}
+
+function updateCellState(x, y, new_arena) {
+	var cell_state = arena[y][x];
+	if (cell_state) console.log("Cell " + x + ", " + y + " is alive!");
+	var living_neighbors = 0;
+
+	for (var mod_x = -1; mod_x <= 1; mod_x++) {
+		for (var mod_y = -1; mod_y <= 1; mod_y++) {
+			if (x + mod_x >= 0 && x + mod_x < CELLS_X && // Is this X coordinate outside of the array?
+				y + mod_y >= 0 && y + mod_y < CELLS_Y && // Is this Y coordinate outside of the array?
+				//(!(mod_y == 0 && mod_x == 0)) && // Not looking at self but neighbor
+				arena[y + mod_y][x + mod_x]) { // Is this cell alive?
+
+			   living_neighbors++;
+		   }
+		}
+	}
+
+	if (living_neighbors) console.log("Cell " + x + ", " + y + " has " + living_neighbors + " neighbors.");
+
+	if (cell_state) { // Cell is alive
+		if (living_neighbors < 2) { // Under-Population
+			new_arena[y][x] = false;
+		} else if (living_neighbors > 3) { // Over-Crowding
+			new_arena[y][x] = false;
+		} else { // live on
+			new_arena[y][x] = true;
+		}
+	} else { // Cell is dead
+		if (living_neighbors == 3) { // Reproduction
+			new_arena[y][x] = true;
+		} else {
+			new_arena[y][x] = false;
+		}
+	}
 }
