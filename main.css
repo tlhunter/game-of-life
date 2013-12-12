@@ -1,0 +1,7 @@
+#gamefield {
+	outline: 4px solid orange;
+	cursor: crosshair;
+}
+.gamefield-wrapper {
+	padding: 4px;
+}
