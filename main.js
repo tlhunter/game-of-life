@@ -88,8 +88,8 @@ $(function() {
 
 	$gamefield.on('click', function(event) {
 		var tile = {
-			x: Math.floor(event.offsetX / TILE_WIDTH),
-			y: Math.floor(event.offsetY / TILE_HEIGHT),
+			x: Math.floor((event.pageX - $gamefield.offset().left) / TILE_WIDTH),
+			y: Math.floor((event.pageY - $gamefield.offset().top) / TILE_HEIGHT),
 		};
 
 		if (tile.x >= PLAYABLE.x && tile.y >= PLAYABLE.y && tile.x < PLAYABLE.x + PLAYABLE.width && tile.y < PLAYABLE.x + PLAYABLE.height) {
