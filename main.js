@@ -9,7 +9,7 @@ var CELLS_Y = GAMEFIELD_HEIGHT / TILE_HEIGHT;
 
 var generation = 0;
 var $generation = null;
-var arena = buildArena(CELLS_X, CELLS_Y);
+var arena = buildArena();
 var arena_init = null;
 var context = null;
 var redraw = null;
@@ -24,16 +24,24 @@ var $title = null;
 var $gamefield = null;
 var $piece_count = null;
 
-var PLAYABLE = {
-	x: 24,
-	y: 24,
-	width: 16,
-	height: 16,
-};
+var current_level = 0; // zero based level system
+var level_earned = 0;
+
+var playable = {};
 
 var goal = {};
+var levels = [];
 
 $(function() {
+	$.getJSON('./levels.json', function(data) {
+		levels = data;
+		setupdom();
+		loadLevel(current_level);
+		init();
+	});
+});
+
+function setupdom() {
 	log("DOM Ready");
 
 	$play = $('#button-play');
@@ -48,60 +56,19 @@ $(function() {
 
 	var gamefield = document.getElementById('gamefield');
 	context = gamefield.getContext('2d');
+}
 
+function init() {
 	log("Gamefield Cells: [" + CELLS_X + ", " + CELLS_Y + "]");
-
-	goal = {
-		x: Math.floor(Math.random() * CELLS_X),
-		y: Math.floor(Math.random() * CELLS_Y),
-	};
-
-	// Quick lil' glider
-	arena[30][30] = true;
-	arena[31][30] = true;
-	arena[32][30] = true;
-	arena[32][29] = true;
-	arena[31][28] = true;
-
-	arena[36][37] = true;
-	arena[35][36] = true;
-	arena[37][36] = true;
-	arena[36][35] = true;
 
 	countPlayedPieces();
 
 	drawArena(); // First Draw
 
-	$play.on('click', function() {
-		$stop.attr('disabled', false);
-		$play.attr('disabled', true);
-		playing = true;
-
-		arena_init = arena.slice(0); // Backup the initial arena state
-
-		drawArena();
-		redraw = setInterval(animate, 150);
-	});
-
-	$stop.on('click', function() {
-		clearTimeout(redraw); 
-
-		$play.attr('disabled', false);
-		$stop.attr('disabled', true);
-
-		generation = 0;
-		$generation.html(generation);
-
-		playing = false;
-		generations_until_beaten = 0;
-
-		arena = arena_init.slice(0); // Restore the initial arena state
-		drawArena();
-	});
-
-	$next.on('click', function() {
-		log("Feature not-yet implemented :'(");
-	});
+	$play.on('click', play);
+	$stop.on('click', stop);
+	$next.on('click', nextLevel);
+	$prev.on('click', prevLevel);
 
 	$gamefield.on('click', function(event) {
 		var tile = {
@@ -111,7 +78,7 @@ $(function() {
 
 		if (playing) {
 			log("Cannot change the game while playing.");
-		} else if (tile.x >= PLAYABLE.x && tile.y >= PLAYABLE.y && tile.x < PLAYABLE.x + PLAYABLE.width && tile.y < PLAYABLE.x + PLAYABLE.height) {
+		} else if (tile.x >= playable.x && tile.y >= playable.y && tile.x < playable.x + playable.width && tile.y < playable.x + playable.height) {
 			arena[tile.y][tile.x] = !arena[tile.y][tile.x];
 			log("Toggled [" + tile.x + ", " + tile.y + "].");
 			countPlayedPieces();
@@ -121,13 +88,96 @@ $(function() {
 
 		drawArena();
 	});
-});
+}
+
+function play() {
+	$stop.attr('disabled', false);
+	$play.attr('disabled', true);
+	playing = true;
+
+	arena_init = arena.slice(0); // Backup the initial arena state
+
+	drawArena();
+	redraw = setInterval(animate, 150);
+}
+
+function stop() {
+	clearTimeout(redraw); 
+
+	$play.attr('disabled', false);
+	$stop.attr('disabled', true);
+
+	generation = 0;
+	$generation.html(generation);
+
+	playing = false;
+	generations_until_beaten = 0;
+
+	arena = arena_init.slice(0); // Restore the initial arena state
+	drawArena();
+}
+
+function nextLevel() {
+	stop();
+
+	$next.attr('disabled', true);
+	$prev.attr('disabled', false);
+
+	current_level++;
+	loadLevel(current_level);
+}
+
+function prevLevel() {
+}
+
+function winLevel() {
+	$('#gamefield-wrapper').addClass('won');
+	$next.attr('disabled', false);
+	//clearTimeout(redraw); 
+	log("Game won in " + generation + " generations!");
+	generations_until_beaten = generation;
+
+	if (current_level == level_earned) {
+		level_earned++;
+		console.log("beat most recent level. unlocking next level: " + level_earned);
+	}
+}
+
+function loadLevel(level_id) {
+	var level = levels[level_id];
+	generation = 0;
+	generations_until_beaten = 0;
+	current_level = level_id;
+
+	$title.text(level.title);
+	goal = level.goal;
+	playable = level.playable;
+
+	arena = buildArena(); // Reset arena to nothing
+
+	console.log(arena);
+	// Build new arena
+	for (var coord in level.arena) {
+		arena[level.arena[coord][1]][level.arena[coord][0]] = true;
+	}
+
+	// Make this the initial state
+	arena_init = arena.slice(0);
+
+	drawArena();
+
+	countPlayedPieces();
+
+	setTimeout(function() {
+		alert(level.description);
+	}, 0);
+}
 
 function countPlayedPieces() {
 	var counter = 0;
 
-	for (var y = PLAYABLE.y; y < PLAYABLE.y + PLAYABLE.height; y++) {
-		for (var x = PLAYABLE.x; x < PLAYABLE.x + PLAYABLE.width; x++) {
+	for (var y = playable.y; y < playable.y + playable.height; y++) {
+		for (var x = playable.x; x < playable.x + playable.width; x++) {
 			if (arena[y][x]) {
 				counter++;
 			}
@@ -138,12 +188,12 @@ function countPlayedPieces() {
 	return counter;
 }
 
-function buildArena(constraint_x, constraint_y) {
+function buildArena() {
 	var new_arena = [];
 
-	for (var y = 0; y < constraint_y; y++) {
+	for (var y = 0; y < CELLS_Y; y++) {
 		new_arena[y] = [];
-		for (var x = 0; x < constraint_x; x++) {
+		for (var x = 0; x < CELLS_X; x++) {
 			new_arena[y][x] = false;
 		}
 	}
@@ -157,11 +207,7 @@ function drawArena() {
 			if (goal.x == x && goal.y == y) {
 				context.fillStyle = "rgb(0,127,255)";
 				if (arena[y][x] && !generations_until_beaten) {
-					$('#gamefield-wrapper').addClass('won');
-					$next.attr('disabled', false);
-					//clearTimeout(redraw); 
-					log("Game won in " + generation + " generations!");
-					generations_until_beaten = generation;
+					winLevel();
 				}
 			} else if (arena[y][x]) {
 				context.fillStyle = "rgb(0,0,0)";
@@ -172,20 +218,23 @@ function drawArena() {
 		}
 	}
 
-	context.fillStyle = "rgba(255,127,0, 0.1)";
-	context.fillRect(
-		PLAYABLE.x * TILE_WIDTH,
-		PLAYABLE.y * TILE_HEIGHT,
-		PLAYABLE.width * TILE_WIDTH,
-		PLAYABLE.height * TILE_HEIGHT
-	);
+	// Draw playable zone (if applicable)
+	if (playable.width && playable.height) {
+		context.fillStyle = "rgba(255,127,0, 0.1)";
+		context.fillRect(
+			playable.x * TILE_WIDTH,
+			playable.y * TILE_HEIGHT,
+			playable.width * TILE_WIDTH,
+			playable.height * TILE_HEIGHT
+		);
+	}
 }
 
 function animate() {
 	generation++;
 	$generation.html(generation);
 
-	var new_arena = buildArena(CELLS_X, CELLS_Y);
+	var new_arena = buildArena();
 
 	for (var y = 0; y < CELLS_Y; y++) {
 		for (var x = 0; x < CELLS_X; x++) {

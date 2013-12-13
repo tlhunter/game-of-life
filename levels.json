@@ -1,0 +1,39 @@
+[
+	{
+		"title": "Tutorial #1: Watch and Learn",
+		"description": "This is just a tutorial level. That funny shape is called a glider. Click play to see what happnes!",
+		"goal": {
+			"x": 60,
+			"y": 60
+		},
+		"playable": {
+			"x": 0,
+			"y": 0,
+			"width": 0,
+			"height": 0
+		},
+		"arena": [
+			[30,30],
+			[31,30],
+			[32,30],
+			[32,29],
+			[31,28]
+		]
+	},
+	{
+		"title": "Tutorial #2: Now you Try",
+		"description": "Try to draw the same shape that you saw before, and get that blue dot (goal) to activate!",
+		"goal": {
+			"x": 60,
+			"y": 60
+		},
+		"playable": {
+			"x": 24,
+			"y": 24,
+			"width": 16,
+			"height":16 
+		},
+		"arena": [
+		]
+	}
+]
