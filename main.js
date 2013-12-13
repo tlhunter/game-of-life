@@ -225,7 +225,7 @@ function drawArena() {
 
 	// Draw playable zone (if applicable)
 	if (playable.width && playable.height) {
-		context.fillStyle = "rgba(255,127,0, 0.1)";
+		context.fillStyle = "rgba(255,127,0, 0.3)";
 		context.fillRect(
 			playable.x * TILE_WIDTH,
 			playable.y * TILE_HEIGHT,
