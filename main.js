@@ -18,6 +18,7 @@ var generations_until_beaten = 0;
 
 var $play = null;
 var $stop = null;
+var $clear = null;
 var $prev = null;
 var $next = null;
 var $title = null;
@@ -47,6 +48,7 @@ function setupdom() {
 
 	$play = $('#button-play');
 	$stop = $('#button-stop');
+	$clear = $('#button-clear');
 	$prev = $('#button-level-prev');
 	$next = $('#button-level-next');
 
@@ -69,6 +71,7 @@ function init() {
 
 	$play.on('click', play);
 	$stop.on('click', stop);
+	$clear.on('click', clear);
 	$next.on('click', nextLevel);
 	$prev.on('click', prevLevel);
 
@@ -94,6 +97,7 @@ function init() {
 
 function play() {
 	$stop.attr('disabled', false);
+	$clear.attr('disabled', true);
 	$play.attr('disabled', true);
 	playing = true;
 
@@ -108,6 +112,7 @@ function stop() {
 
 	$play.attr('disabled', false);
 	$stop.attr('disabled', true);
+	$clear.attr('disabled', false);
 
 	generation = 0;
 	$generation.html(generation);
@@ -161,7 +166,6 @@ function loadLevel(level_id) {
 
 	arena = buildArena(); // Reset arena to nothing
 
-	console.log(arena);
 	// Build new arena
 	for (var coord in level.arena) {
 		arena[level.arena[coord][1]][level.arena[coord][0]] = true;
@@ -191,6 +195,18 @@ function countPlayedPieces() {
 	$piece_count.text(counter);
 
 	return counter;
+}
+
+function clear() {
+	for (var y = playable.y; y < playable.y + playable.height; y++) {
+		for (var x = playable.x; x < playable.x + playable.width; x++) {
+			arena[y][x] = false;
+		}
+	}
+
+	log("The playing field has been cleared.");
+
+	drawArena();
 }
 
 function buildArena() {
@@ -282,6 +298,29 @@ function updateCellState(x, y, new_arena) {
 			new_arena[y][x] = false;
 		}
 	}
+}
+
+function god() {
+	playable = {
+		x:0,
+		y:0,
+		width:CELLS_X,
+		height:CELLS_Y
+	};
+
+	drawArena();
+}
+
+function godExport() {
+	var pointsInExportFormat = [];
+	for (var y = 0; y < CELLS_Y; y++) {
+		for (var x = 0; x < CELLS_X; x++) {
+			if (arena[y][x]) {
+				pointsInExportFormat.push([x,y]);
+			}
+		}
+	}
+	console.log(JSON.stringify(pointsInExportFormat));
 }
 
 function log(msg) {
