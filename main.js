@@ -104,7 +104,7 @@ function play() {
 }
 
 function stop() {
-	clearTimeout(redraw); 
+	clearTimeout(redraw);
 
 	$play.attr('disabled', false);
 	$stop.attr('disabled', true);
@@ -136,7 +136,7 @@ function prevLevel() {
 function winLevel() {
 	$('#gamefield-wrapper').addClass('won');
 	$next.attr('disabled', false);
-	//clearTimeout(redraw); 
+	//clearTimeout(redraw);
 	log("Game won in " + generation + " generations!");
 	generations_until_beaten = generation;
 
@@ -225,7 +225,7 @@ function drawArena() {
 
 	// Draw playable zone (if applicable)
 	if (playable.width && playable.height) {
-		context.fillStyle = "rgba(255,127,0, 0.3)";
+		context.fillStyle = "rgba(255,127,127, 0.3)";
 		context.fillRect(
 			playable.x * TILE_WIDTH,
 			playable.y * TILE_HEIGHT,
