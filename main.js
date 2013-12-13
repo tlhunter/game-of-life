@@ -10,8 +10,11 @@ var CELLS_Y = GAMEFIELD_HEIGHT / TILE_HEIGHT;
 var generation = 0;
 var $generation = null;
 var arena = buildArena(CELLS_X, CELLS_Y);
+var arena_init = null;
 var context = null;
 var redraw = null;
+var playing = false;
+var generations_until_beaten = 0;
 
 var $play = null;
 var $stop = null;
@@ -19,6 +22,7 @@ var $prev = null;
 var $next = null;
 var $title = null;
 var $gamefield = null;
+var $piece_count = null;
 
 var PLAYABLE = {
 	x: 24,
@@ -39,6 +43,7 @@ $(function() {
 
 	$title = $('#title span');
 	$generation = $('#generation span');
+	$piece_count = $('#piececount span');
 	$gamefield = $('#gamefield');
 
 	var gamefield = document.getElementById('gamefield');
@@ -63,23 +68,35 @@ $(function() {
 	arena[37][36] = true;
 	arena[36][35] = true;
 
+	countPlayedPieces();
+
 	drawArena(); // First Draw
 
 	$play.on('click', function() {
 		$stop.attr('disabled', false);
 		$play.attr('disabled', true);
+		playing = true;
+
+		arena_init = arena.slice(0); // Backup the initial arena state
 
 		drawArena();
 		redraw = setInterval(animate, 150);
 	});
 
 	$stop.on('click', function() {
+		clearTimeout(redraw); 
+
 		$play.attr('disabled', false);
 		$stop.attr('disabled', true);
 
 		generation = 0;
 		$generation.html(generation);
-		clearTimeout(redraw); 
+
+		playing = false;
+		generations_until_beaten = 0;
+
+		arena = arena_init.slice(0); // Restore the initial arena state
+		drawArena();
 	});
 
 	$next.on('click', function() {
@@ -92,16 +109,34 @@ $(function() {
 			y: Math.floor((event.pageY - $gamefield.offset().top) / TILE_HEIGHT),
 		};
 
-		if (tile.x >= PLAYABLE.x && tile.y >= PLAYABLE.y && tile.x < PLAYABLE.x + PLAYABLE.width && tile.y < PLAYABLE.x + PLAYABLE.height) {
+		if (playing) {
+			log("Cannot change the game while playing.");
+		} else if (tile.x >= PLAYABLE.x && tile.y >= PLAYABLE.y && tile.x < PLAYABLE.x + PLAYABLE.width && tile.y < PLAYABLE.x + PLAYABLE.height) {
 			arena[tile.y][tile.x] = !arena[tile.y][tile.x];
 			log("Toggled [" + tile.x + ", " + tile.y + "].");
+			countPlayedPieces();
 		} else {
-			log("Position [" + tile.x + ", " + tile.y + "] is outside of the playable zone.");
+			log("Position [" + tile.x + ", " + tile.y + "] is outside of the playable (pink) zone.");
 		}
 
 		drawArena();
 	});
 });
+
+function countPlayedPieces() {
+	var counter = 0;
+
+	for (var y = PLAYABLE.y; y < PLAYABLE.y + PLAYABLE.height; y++) {
+		for (var x = PLAYABLE.x; x < PLAYABLE.x + PLAYABLE.width; x++) {
+			if (arena[y][x]) {
+				counter++;
+			}
+		}
+	}
+	$piece_count.text(counter);
+
+	return counter;
+}
 
 function buildArena(constraint_x, constraint_y) {
 	var new_arena = [];
@@ -121,11 +156,12 @@ function drawArena() {
 		for (var x = 0; x < CELLS_X; x++) {
 			if (goal.x == x && goal.y == y) {
 				context.fillStyle = "rgb(0,127,255)";
-				if (arena[y][x]) {
+				if (arena[y][x] && !generations_until_beaten) {
 					$('#gamefield-wrapper').addClass('won');
 					$next.attr('disabled', false);
 					//clearTimeout(redraw); 
 					log("Game won in " + generation + " generations!");
+					generations_until_beaten = generation;
 				}
 			} else if (arena[y][x]) {
 				context.fillStyle = "rgb(0,0,0)";
