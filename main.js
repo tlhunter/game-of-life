@@ -6,6 +6,8 @@ var TILE_WIDTH = 8;
 var TILE_HEIGHT = 8;
 var CELLS_X = GAMEFIELD_WIDTH / TILE_WIDTH;
 var CELLS_Y = GAMEFIELD_HEIGHT / TILE_HEIGHT;
+var FAST_SPEED = 1;
+var SLOW_SPEED = 100;
 
 var generation = 0;
 var $generation = null;
@@ -15,11 +17,15 @@ var context = null;
 var redraw = null;
 var playing = false;
 var generations_until_beaten = 0;
+var speed = SLOW_SPEED;
+var drawstate = null;
 
 var $play = null;
 var $stop = null;
 var $prev = null;
 var $next = null;
+var $fast = null;
+var $slow = null;
 var $title = null;
 var $desc = null;
 var $gamefield = null;
@@ -49,6 +55,8 @@ function setupdom() {
 	$stop = $('#button-stop');
 	$prev = $('#button-level-prev');
 	$next = $('#button-level-next');
+	$fast = $('#button-fast');
+	$slow = $('#button-slow');
 
 	$title = $('#title span');
 	$desc = $('#description');
@@ -72,24 +80,63 @@ function init() {
 	$next.on('click', nextLevel);
 	$prev.on('click', prevLevel);
 
-	$gamefield.on('click', function(event) {
-		var tile = {
-			x: Math.floor((event.pageX - $gamefield.offset().left) / TILE_WIDTH),
-			y: Math.floor((event.pageY - $gamefield.offset().top) / TILE_HEIGHT),
-		};
+	$fast.on('click', goFast);
+	$slow.on('click', goSlow);
 
-		if (playing) {
-			log("Cannot change the game while playing.");
-		} else if (tile.x >= playable.x && tile.y >= playable.y && tile.x < playable.x + playable.width && tile.y < playable.y + playable.height) {
-			arena[tile.y][tile.x] = !arena[tile.y][tile.x];
-			log("Toggled [" + tile.x + ", " + tile.y + "].");
-			countPlayedPieces();
-		} else {
-			log("Position [" + tile.x + ", " + tile.y + "] is outside of the playable (pink) zone.");
-		}
-
-		drawArena();
+	$gamefield.on('mousedown', function (event) {
+		var tile = eventPos(event);
+		drawstate = !arena[tile.y][tile.x];
+		setTile(tile, drawstate)
 	});
+	$gamefield.on('mousemove', function (event) {
+		if (drawstate === null) return;
+		setTile(eventPos(event), drawstate);
+	});
+	$gamefield.on('mouseup', function () {
+		drawstate = null;
+	});
+}
+
+function eventPos(event) {
+	return {
+		x: Math.floor((event.pageX - $gamefield.offset().left) / TILE_WIDTH),
+		y: Math.floor((event.pageY - $gamefield.offset().top) / TILE_HEIGHT),
+	};
+}
+
+function setTile(tile, state) {
+	if (playing) {
+		log("Cannot change the game while playing.");
+	} else if (tile.x >= playable.x && tile.y >= playable.y && tile.x < playable.x + playable.width && tile.y < playable.y + playable.height) {
+		if (state === undefined) state = !arena[tile.y][tile.x];
+		arena[tile.y][tile.x] = state;
+		log("Toggled [" + tile.x + ", " + tile.y + "].");
+		countPlayedPieces();
+	} else {
+		log("Position [" + tile.x + ", " + tile.y + "] is outside of the playable (pink) zone.");
+	}
+
+	drawArena();
+}
+
+function goSlow() {
+	setSpeed(SLOW_SPEED);
+	$slow.attr('disabled', true);
+	$fast.attr('disabled', false);
+}
+
+function goFast() {
+	setSpeed(FAST_SPEED);
+	$fast.attr('disabled', true);
+	$slow.attr('disabled', false);
+}
+
+function setSpeed(number) {
+	speed = number;
+	if (playing) {
+		clearTimeout(redraw);
+		redraw = setInterval(animate, speed);
+	}
 }
 
 function play() {
@@ -100,7 +147,7 @@ function play() {
 	arena_init = arena.slice(0); // Backup the initial arena state
 
 	drawArena();
-	redraw = setInterval(animate, 100);
+	redraw = setInterval(animate, speed);
 }
 
 function stop() {
