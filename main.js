@@ -78,7 +78,7 @@ function init() {
 
 		if (playing) {
 			log("Cannot change the game while playing.");
-		} else if (tile.x >= playable.x && tile.y >= playable.y && tile.x < playable.x + playable.width && tile.y < playable.x + playable.height) {
+		} else if (tile.x >= playable.x && tile.y >= playable.y && tile.x < playable.x + playable.width && tile.y < playable.y + playable.height) {
 			arena[tile.y][tile.x] = !arena[tile.y][tile.x];
 			log("Toggled [" + tile.x + ", " + tile.y + "].");
 			countPlayedPieces();
@@ -98,7 +98,7 @@ function play() {
 	arena_init = arena.slice(0); // Backup the initial arena state
 
 	drawArena();
-	redraw = setInterval(animate, 150);
+	redraw = setInterval(animate, 100);
 }
 
 function stop() {
@@ -121,13 +121,14 @@ function nextLevel() {
 	stop();
 
 	$next.attr('disabled', true);
-	$prev.attr('disabled', false);
+	//$prev.attr('disabled', false);
 
 	current_level++;
 	loadLevel(current_level);
 }
 
 function prevLevel() {
+	alert("not yet implemented!");
 }
 
 function winLevel() {
@@ -137,7 +138,9 @@ function winLevel() {
 	log("Game won in " + generation + " generations!");
 	generations_until_beaten = generation;
 
-	if (current_level == level_earned) {
+	if (current_level == levels.length - 1) {
+		alert("You've won the game!");
+	} else if (current_level == level_earned) {
 		level_earned++;
 		console.log("beat most recent level. unlocking next level: " + level_earned);
 	}
@@ -167,6 +170,8 @@ function loadLevel(level_id) {
 	drawArena();
 
 	countPlayedPieces();
+
+	$('#gamefield-wrapper').removeClass('won');
 
 	setTimeout(function() {
 		alert(level.description);

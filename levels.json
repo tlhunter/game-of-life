@@ -35,5 +35,51 @@
 		},
 		"arena": [
 		]
+	},
+	{
+		"title": "Tutorial #3: Build more Gliders!",
+		"description": "Oh no! Something is in the way! Try to kill it! If you can build a barrage of gliders, that might work.",
+		"goal": {
+			"x": 60,
+			"y": 60
+		},
+		"playable": {
+			"x": 24,
+			"y": 24,
+			"width": 16,
+			"height":16 
+		},
+		"arena": [
+			[57,57],
+			[57,58],
+			[57,59]
+		]
+	},
+	{
+		"title": "First Real Mission",
+		"description": "The rules which control the Game of Life world are very very simple, and yet you can build some powerful chain reactions using it.",
+		"goal": {
+			"x": 32,
+			"y": 2
+		},
+		"playable": {
+			"x": 0,
+			"y": 48,
+			"width": 64,
+			"height":16 
+		},
+		"arena": [
+			[32,6],
+			[32,7],
+			[32,8],
+
+			[29,6],
+			[29,7],
+			[29,8],
+
+			[35,6],
+			[35,7],
+			[35,8]
+		]
 	}
 ]
