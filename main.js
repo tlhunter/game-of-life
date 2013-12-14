@@ -441,12 +441,14 @@ function updateCellState(x, y, new_arena) {
 }
 
 function god() {
-	playable = [{
+	playables = [{
 		x:0,
 		y:0,
 		width:CELLS_X,
 		height:CELLS_Y
 	}];
+
+	deadzones = [];
 
 	drawArena();
 }
