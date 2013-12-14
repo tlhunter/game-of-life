@@ -26,6 +26,14 @@ var $desc = null;
 var $gamefield = null;
 var $piece_count = null;
 
+var colors = {
+	goal:		"rgb(0,127,255)",
+	playable:	"rgba(255,127,0, 0.3)",
+	deadzone:	"rgba(127,127,0,0.3)",
+	dead:		"rgb(255,255,255)",
+	alive:		"rgb(0,0,0)"
+}
+
 var current_level = 0; // zero based level system
 var level_earned = 0;
 
@@ -255,21 +263,21 @@ function drawArena() {
 	for (var y = 0; y < CELLS_Y; y++) {
 		for (var x = 0; x < CELLS_X; x++) {
 			if (goal.x == x && goal.y == y) {
-				context.fillStyle = "rgb(0,127,255)";
+				context.fillStyle = colors.goal;
 				if (arena[y][x] && !generations_until_beaten) {
 					winLevel();
 				}
 			} else if (arena[y][x]) {
-				context.fillStyle = "rgb(0,0,0)";
+				context.fillStyle = colors.alive;
 			} else {
-				context.fillStyle = "rgb(255,255,255)";
+				context.fillStyle = colors.dead;
 			}
 			context.fillRect(x * TILE_WIDTH, y * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
 		}
 	}
 
 	// Draw playable zone (if applicable)
-	context.fillStyle = "rgba(255,127,0, 0.3)";
+	context.fillStyle = colors.playable;
 	for (var i in playables) {
 		context.fillRect(
 			playables[i].x * TILE_WIDTH,
@@ -280,7 +288,7 @@ function drawArena() {
 	}
 
 	// Draw dead zones (if applicable)
-	context.fillStyle = "rgba(127,127,0,0.3)";
+	context.fillStyle = colors.deadzone;
 	for (var i in deadzones) {
 		context.fillRect(
 			deadzones[i].x * TILE_WIDTH,
