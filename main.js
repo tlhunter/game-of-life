@@ -85,6 +85,27 @@ function init() {
 	$next.on('click', nextLevel);
 	$prev.on('click', prevLevel);
 
+	$(document).keypress(function(event) {
+		if (event.charCode === 32) { // User pressed space
+			event.preventDefault();
+			if (playing) {
+				stop();
+			} else {
+				play();
+			}
+		} else if (event.charCode === 99 || event.charCode === 67) { // User pressed 'c'
+			event.preventDefault();
+			if (!playing) {
+				$clear.click();
+			}
+		} else if (event.charCode === 110 || event.charCode === 78) { // User pressed 'n'
+			event.preventDefault();
+			if (generations_until_beaten) {
+				$next.click();
+			}
+		}
+	});
+
 	$gamefield.on('click', function(event) {
 		var tile = {
 			x: Math.floor((event.pageX - $gamefield.offset().left) / TILE_WIDTH),
@@ -133,7 +154,6 @@ function stop() {
 	$generation.html(generation);
 
 	playing = false;
-	generations_until_beaten = 0;
 
 	arena = arena_init.slice(0); // Restore the initial arena state
 	drawArena();
