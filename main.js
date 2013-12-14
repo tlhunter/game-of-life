@@ -175,7 +175,6 @@ function prevLevel() {
 
 function winLevel() {
 	$('#gamefield-wrapper').addClass('won');
-	$next.attr('disabled', false);
 	//clearTimeout(redraw); 
 	log("Game won in " + generation + " generations!");
 	generations_until_beaten = generation;
@@ -183,6 +182,7 @@ function winLevel() {
 	if (current_level == levels.length - 1) {
 		alert("You've won the game!");
 	} else if (current_level == level_earned) {
+		$next.attr('disabled', false);
 		level_earned++;
 		console.log("beat most recent level. unlocking next level: " + level_earned);
 	}
