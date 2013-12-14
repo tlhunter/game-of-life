@@ -130,9 +130,15 @@ function eventPos(event) {
 	};
 }
 
+// Someone clicked a tile and is trying to set the state to something else
 function setTile(tile, state) {
 	if (playing) {
 		log("Cannot change the game while playing.");
+		return;
+	}
+
+	if (!playables.length) {
+		log("This level doesn't have any playable areas. Just click play!");
 		return;
 	}
 
@@ -251,7 +257,7 @@ function loadLevel(level_id) {
 	drawArena();
 	log("Loaded level #" + (level_id + 1));
 
-	if (!playables) {
+	if (!playables.length) {
 		$clear.hide();
 	} else {
 		$clear.show();
@@ -262,7 +268,12 @@ function loadLevel(level_id) {
 	$('#gamefield-wrapper').removeClass('won');
 }
 
+// Count the number of alive cells in the playable areas (pieces the user has contorl over)
 function countPlayedPieces() {
+	if (!playables.length) {
+		return 0;
+	}
+
 	var counter = 0;
 
 	for (var i in playables) {
@@ -279,7 +290,14 @@ function countPlayedPieces() {
 	return counter;
 }
 
+// Clear all the playable areas
 function clear() {
+	if (!playables.length) {
+		log("There are no playable areas to clear!");
+		drawArena(); // might as well...
+		return;
+	}
+
 	for (var i in playables) {
 		for (var y = playables[i].y; y < playables[i].y + playables[i].height; y++) {
 			for (var x = playables[i].x; x < playables[i].x + playables[i].width; x++) {
