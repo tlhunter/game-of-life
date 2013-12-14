@@ -440,6 +440,7 @@ function updateCellState(x, y, new_arena) {
 	}
 }
 
+// Makes hte whole level editable
 function god() {
 	playables = [{
 		x:0,
@@ -453,8 +454,10 @@ function god() {
 	drawArena();
 }
 
+// Creates some JSON you can paste into the levels.json file
 function godExport() {
 	var pointsInExportFormat = [];
+
 	for (var y = 0; y < CELLS_Y; y++) {
 		for (var x = 0; x < CELLS_X; x++) {
 			if (arena[y][x]) {
@@ -462,7 +465,15 @@ function godExport() {
 			}
 		}
 	}
-	console.log(JSON.stringify(pointsInExportFormat));
+
+	console.log(JSON.stringify({
+		title: "TITLE",
+		description: "DESC",
+		goal: goal,
+		deadzones: deadzones,
+		playables: playables,
+		arena: pointsInExportFormat
+	}, null, "  "));
 }
 
 function log(msg) {
