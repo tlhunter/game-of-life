@@ -5,22 +5,19 @@
 	</head>
 	<body>
 		<h1>Strategic Game of Life</h1>
-		<div id="toolbar">
-			<div id="buttons">
-				<button id="button-play" title="Play the level (Space)">Play</button>
-				<button id="button-stop" disabled="disabled" title="Stop the level (Space)">Stop</button>
-				<button id="button-clear" title="Clear the Play Acrea (C)">Clear</button>
-				<button id="button-level-next" disabled="disabled" title="Load the Next Level (N)">Next Level</button>
-				<button id="button-level-prev" disabled="disabled">Previous Level</button>
-			</div>
-			<div id="statistics">
-				<div id="generation">Generation: <span>0</span></div>
-				<div id="piececount">Pieces Played: <span>0</span></div>
-			</div>
-		</div>
 		<div id="main-wrapper">
-			<div id="gamefield-wrapper">
-				<canvas id="gamefield" width="512" height="512"></canvas>
+			<div id="toolbar">
+				<div id="buttons">
+					<button id="button-play" title="Play the level (Space)">Play</button>
+					<button id="button-stop" disabled="disabled" title="Stop the level (Space)">Stop</button>
+					<button id="button-clear" title="Clear the Play Acrea (C)">Clear</button>
+					<button id="button-level-next" disabled="disabled" title="Load the Next Level (N)">Next Level</button>
+					<button id="button-level-prev" disabled="disabled">Previous Level</button>
+				</div>
+				<div id="statistics">
+					<div id="generation">Generation: <span>0</span></div>
+					<div id="piececount">Pieces Played: <span>0</span></div>
+				</div>
 			</div>
 			<div id="library">
 				<div><strong>Library</strong></div>
@@ -31,6 +28,9 @@
 				<div id="library-4" class="item"><img src="images/glider-gun.png" /><span class="name"><a href="http://www.conwaylife.com/wiki/Gun" target="_blank">Glider Gun</a></span></div>
 				<div id="library-5" class="item"><img src="images/multum-in-parvo.png" /><span class="name"><a href="http://www.conwaylife.com/wiki/Multum_in_parvo" target="_blank">Multum in Parvo</a></span></div>
 			</div>
+			<div id="gamefield-wrapper">
+				<canvas id="gamefield" width="512" height="512"></canvas>
+			</div>
 			<div id="description">
 				<div>Level <span id="level-counter"></span>: <strong id="title">Page Loading...</strong></div>
 				<div class="text">Page Loading...</div>
@@ -40,8 +40,8 @@
 					<br /><strong>SPACE</strong>: Toggle Play/Stop<br /><strong>N</strong>: Load Next Level<br /><strong>C</strong>: Clear Playable Area
 				</div>
 			</div>
+			<div id="console">Page Loading...</div>
 		</div>
-		<div id="console">Page Loading...</div>
 	</body>
 	<script src="jquery-1.10.2.min.js"></script>
 	<script src="main.js"></script>

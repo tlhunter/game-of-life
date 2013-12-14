@@ -1,11 +1,14 @@
 #gamefield-wrapper {
 	background-color: orange;
+	margin: 0 10px;
 }
 #gamefield {
 	cursor: crosshair;
 }
 #main-wrapper {
 	height: 520px;
+	width: 1140px;
+	margin: 0 auto;
 }
 #gamefield-wrapper {
 	padding: 4px;
@@ -15,6 +18,7 @@
 	height: 520px;
 	float: left;
 	width: 128px;
+	margin-left: 172px; /* ML + W = 300 (#description width) */
 	text-align: center;
 }
 #library .item {
@@ -78,6 +82,12 @@
 	border-bottom-left-radius: 4px;
 	border-bottom-right-radius: 4px;
 }
+#console, #toolbar {
+	margin-left: 310px;
+}
 #button-level-prev {
 	display: none;
+}
+h1 {
+	text-align: center;
 }
