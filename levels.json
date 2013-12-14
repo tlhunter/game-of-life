@@ -447,8 +447,8 @@
 	},
 
 	{
-		"title": "Impossible?",
-		"description": "This one might not be possible. I haven't beaten it yet, that's for sure.",
+		"title": "Getting Difficult",
+		"description": "This one looks pretty difficult. You can't simply send a spaceship up and crash it into the wall and spawn a glider, as the horizontal gap is too small. As a hint, I was able to beat this on Generation 432 with 20 Pieces Played.",
 		"goal": {
 			"x": 32,
 			"y": 4
