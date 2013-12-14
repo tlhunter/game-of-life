@@ -30,6 +30,7 @@ var current_level = 0; // zero based level system
 var level_earned = 0;
 
 var playable = {};
+var deadzones = [];
 
 var goal = {};
 var levels = [];
@@ -162,13 +163,26 @@ function loadLevel(level_id) {
 	$title.text(level.title);
 	$desc.html(level.description);
 	goal = level.goal;
-	playable = level.playable;
+
+	if (typeof level.playable != "undefined") {
+		playable = level.playable;
+	} else {
+		playable = {x: 0, y: 0, width: 0, height: 0};
+	}
 
 	arena = buildArena(); // Reset arena to nothing
 
 	// Build new arena
-	for (var coord in level.arena) {
-		arena[level.arena[coord][1]][level.arena[coord][0]] = true;
+	if (typeof level.arena != "undefined") {
+		for (var coord in level.arena) {
+			arena[level.arena[coord][1]][level.arena[coord][0]] = true;
+		}
+	}
+
+	if (typeof level.deadzones != "undefined") {
+		deadzones = level.deadzones;
+	} else {
+		deadzones = [];
 	}
 
 	// Make this the initial state
@@ -255,8 +269,20 @@ function drawArena() {
 			playable.height * TILE_HEIGHT
 		);
 	}
+
+	// Draw dead zones (if applicable)
+	context.fillStyle = "rgba(127,127,0,0.3)";
+	for (var i in deadzones) {
+		context.fillRect(
+			deadzones[i].x * TILE_WIDTH,
+			deadzones[i].y * TILE_HEIGHT,
+			deadzones[i].width * TILE_WIDTH,
+			deadzones[i].height * TILE_HEIGHT
+		);
+	}
 }
 
+// Draw each new generation
 function animate() {
 	generation++;
 	$generation.html(generation);

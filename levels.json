@@ -6,12 +6,6 @@
 			"x": 60,
 			"y": 60
 		},
-		"playable": {
-			"x": 0,
-			"y": 0,
-			"width": 0,
-			"height": 0
-		},
 		"arena": [
 			[30,30],
 			[31,30],
@@ -98,12 +92,6 @@
 			"x": 32,
 			"y": 2
 		},
-		"playable": {
-			"x": 24,
-			"y": 24,
-			"width": 0,
-			"height": 0 
-		},
 		"arena": [[32,29],[33,29],[34,29],[31,30],[34,30],[30,31],[29,32]]
 	},
 
@@ -132,6 +120,35 @@
 			[35,6],
 			[35,7],
 			[35,8]
+		]
+	},
+
+	{
+		"title": "Hookshot",
+		"description": "Notice the green zones. These are Dead Zones. No cells will become alive in these zones, so you'll have to find a way to get around them.",
+		"goal": {
+			"x": 3,
+			"y": 3
+		},
+		"playable": {
+			"x": 0,
+			"y": 48,
+			"width": 32,
+			"height": 16
+		},
+		"deadzones": [
+			{
+				"x": 0,
+				"y": 22,
+				"width": 16,
+				"height": 4
+			},
+			{
+				"x": 48,
+				"y": 22,
+				"width": 16,
+				"height": 4
+			}
 		]
 	}
 ]
