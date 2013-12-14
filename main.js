@@ -15,6 +15,7 @@ var context = null;
 var redraw = null;
 var playing = false;
 var generations_until_beaten = 0;
+var drawstate = null;
 
 var $play = null;
 var $stop = null;
@@ -106,29 +107,45 @@ function init() {
 		}
 	});
 
-	$gamefield.on('click', function(event) {
-		var tile = {
-			x: Math.floor((event.pageX - $gamefield.offset().left) / TILE_WIDTH),
-			y: Math.floor((event.pageY - $gamefield.offset().top) / TILE_HEIGHT),
-		};
+	$gamefield.on('mousedown', function (event) {
+		var tile = eventPos(event);
+		drawstate = !arena[tile.y][tile.x];
+		setTile(tile, drawstate)
+	});
+	$gamefield.on('mousemove', function (event) {
+		if (drawstate === null) return;
+		setTile(eventPos(event), drawstate);
+	});
+	$gamefield.on('mouseup', function () {
+		drawstate = null;
+	});
+}
 
-		if (playing) {
-			log("Cannot change the game while playing.");
+function eventPos(event) {
+	return {
+		x: Math.floor((event.pageX - $gamefield.offset().left) / TILE_WIDTH),
+		y: Math.floor((event.pageY - $gamefield.offset().top) / TILE_HEIGHT),
+	};
+}
+
+function setTile(tile, state) {
+	if (playing) {
+		log("Cannot change the game while playing.");
+		return;
+	}
+
+	for (var i in playables) {
+		if (tile.x >= playables[i].x && tile.y >= playables[i].y && tile.x < playables[i].x + playables[i].width && tile.y < playables[i].y + playables[i].height) {
+			if (state === undefined) state = !arena[tile.y][tile.x];
+			arena[tile.y][tile.x] = state;
+			log("Toggled [" + tile.x + ", " + tile.y + "].");
+			countPlayedPieces();
+			drawArena();
 			return;
 		}
+	}
 
-		for (var i in playables) {
-			if (tile.x >= playables[i].x && tile.y >= playables[i].y && tile.x < playables[i].x + playables[i].width && tile.y < playables[i].y + playables[i].height) {
-				arena[tile.y][tile.x] = !arena[tile.y][tile.x];
-				log("Toggled [" + tile.x + ", " + tile.y + "].");
-				countPlayedPieces();
-				drawArena();
-				return;
-			}
-		}
-
-		log("Position [" + tile.x + ", " + tile.y + "] is outside of the playable (pink) zone.");
-	});
+	log("Position [" + tile.x + ", " + tile.y + "] is outside of the playable (pink) zone.");
 }
 
 function play() {
