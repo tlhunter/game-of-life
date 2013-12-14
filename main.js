@@ -315,6 +315,13 @@ function updateCellState(x, y, new_arena) {
 		}
 	}
 
+	for (var i in deadzones) {
+		if (deadzones[i].x <= x && deadzones[i].x+deadzones[i].width > x && deadzones[i].y <= y && deadzones[i].y+deadzones[i].height > y) {
+			new_arena[y][x] = false;
+			return;
+		}
+	}
+
 	if (cell_state) { // Cell is alive
 		if (living_neighbors < 2) { // Under-Population
 			new_arena[y][x] = false;
