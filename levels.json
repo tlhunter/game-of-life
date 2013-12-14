@@ -1,7 +1,7 @@
 [
 	{
 		"title": "Tutorial #1: Watch and Learn",
-		"description": "This is just a tutorial level. That funny shape is called a glider. Click play to see what happnes!",
+		"description": "Welcome to Strategic Game of Life! This is the first tutorial level. Do you see that shape in the middle of the screen? It's called a Glider. Click play and watch what happens.",
 		"goal": {
 			"x": 60,
 			"y": 60
@@ -20,9 +20,10 @@
 			[31,28]
 		]
 	},
+
 	{
 		"title": "Tutorial #2: Now you Try",
-		"description": "Try to draw the same shape that you saw before, and get that blue dot (goal) to activate!",
+		"description": "The Game of Life is a very simple simulation. The rules are very simple (read about the <a href=\"https://en.wikipedia.org/wiki/Conway's_Game_of_Life\" target=\"_blank\">Game of Life on WikiPedia</a>). For now, draw that same Glider you saw before and click play. Your goal is to hit the Blue square.",
 		"goal": {
 			"x": 60,
 			"y": 60
@@ -31,14 +32,15 @@
 			"x": 24,
 			"y": 24,
 			"width": 16,
-			"height":16 
+			"height": 16 
 		},
 		"arena": [
 		]
 	},
+
 	{
 		"title": "Tutorial #3: Build more Gliders!",
-		"description": "Oh no! Something is in the way! Try to kill it! If you can build a barrage of gliders, that might work.",
+		"description": "This time, there's something in the way of your goal! If you draw a Glider in the lower right corner of the playfield, then draw another one to the upper left of it, the first should destroy the barrier, and the second can activate the goal.",
 		"goal": {
 			"x": 60,
 			"y": 60
@@ -47,7 +49,7 @@
 			"x": 24,
 			"y": 24,
 			"width": 16,
-			"height":16 
+			"height": 16 
 		},
 		"arena": [
 			[57,57],
@@ -55,9 +57,42 @@
 			[57,59]
 		]
 	},
+
+	{
+		"title": "Tutorial #4: What is a Glider Gun",
+		"description": "This is another non-interactive level. Just click play and watch what happens. The Game of Life can allow for some complex interactions, and as you're about to see, the results can be quite interesting!",
+		"goal": {
+			"x": 60,
+			"y": 46
+		},
+		"playable": {
+			"x": 24,
+			"y": 24,
+			"width": 0,
+			"height": 0 
+		},
+		"arena": [[25,1],[23,2],[25,2],[13,3],[14,3],[21,3],[22,3],[35,3],[36,3],[12,4],[16,4],[21,4],[22,4],[35,4],[36,4],[1,5],[2,5],[11,5],[17,5],[21,5],[22,5],[1,6],[2,6],[11,6],[15,6],[17,6],[18,6],[23,6],[25,6],[11,7],[17,7],[25,7],[12,8],[16,8],[13,9],[14,9]]
+	},
+
+	{
+		"title": "Tutorial #5: Multum in Parvo",
+		"description": "This is another non-interactive level. Notice how simple the pattern in the middle of the arena is, and yet, see how complex it can become.",
+		"goal": {
+			"x": 32,
+			"y": 2
+		},
+		"playable": {
+			"x": 24,
+			"y": 24,
+			"width": 0,
+			"height": 0 
+		},
+		"arena": [[32,29],[33,29],[34,29],[31,30],[34,30],[30,31],[29,32]]
+	},
+
 	{
 		"title": "First Real Mission",
-		"description": "The rules which control the Game of Life world are very very simple, and yet you can build some powerful chain reactions using it.",
+		"description": "Alright, it's time for your first real mission! Try to tear your way through the barrier and get to the goal!",
 		"goal": {
 			"x": 32,
 			"y": 2
@@ -66,7 +101,7 @@
 			"x": 0,
 			"y": 48,
 			"width": 64,
-			"height":16 
+			"height": 16 
 		},
 		"arena": [
 			[32,6],

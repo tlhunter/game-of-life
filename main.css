@@ -1,27 +1,83 @@
+#gamefield-wrapper {
+	background-color: orange;
+}
 #gamefield {
-	outline: 4px solid orange;
 	cursor: crosshair;
+}
+#main-wrapper {
+	height: 520px;
 }
 #gamefield-wrapper {
 	padding: 4px;
+	float: left;
 }
-#gamefield-wrapper.won #gamefield {
-	outline-color: lime;
+#library {
+	height: 520px;
+	float: left;
+	width: 128px;
+	text-align: center;
+}
+#library .item {
+	display: block;
+	padding-bottom: 10px;
+}
+#library img {
+}
+#library .name {
+	display: block;
+	font-size: 13px;
+	font-family: sans-serif;
+}
+#description {
+	width: 300px;
+	height: 520px;
+	float: left;
+	position: relative;
+}
+#description .text {
+	padding-top: 10px;
+	font-style: italic;
+}
+#description .footer {
+	position: absolute;
+	bottom: 0px;
+}
+#gamefield-wrapper.won {
+	background-color: lime;
+}
+#toolbar {
+	background-color: black;
+	width: 512px;
+	padding: 4px;
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+	height: 28px;
 }
 #buttons {
-	margin-bottom: 8px;
+	float: left;
 }
-#buttons, #gamefield-wrapper {
+#statistics {
+	float: right;
+	font-size: 11px;
+	font-family: sans;
+	color: white;
+	text-align: right;
+}
+#toolbar, #gamefield-wrapper {
 	user-select: none;
 	-webkit-user-select: none;
 }
 #console {
+	clear: both;
 	background-color: #000;
 	color: #fff;
 	padding: 4px;
 	font-family: consolas, "courier new";
-	margin-top: 8px;
+	font-size: 13px;
+	width: 512px;
+	border-bottom-left-radius: 4px;
+	border-bottom-right-radius: 4px;
 }
-#description {
-	margin-bottom: 8px;
+#button-level-prev {
+	display: none;
 }

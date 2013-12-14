@@ -52,8 +52,8 @@ function setupdom() {
 	$prev = $('#button-level-prev');
 	$next = $('#button-level-next');
 
-	$title = $('#title span');
-	$desc = $('#description');
+	$title = $('#title');
+	$desc = $('#description .text');
 	$generation = $('#generation span');
 	$piece_count = $('#piececount span');
 	$gamefield = $('#gamefield');
@@ -160,7 +160,7 @@ function loadLevel(level_id) {
 	current_level = level_id;
 
 	$title.text(level.title);
-	$desc.text(level.description);
+	$desc.html(level.description);
 	goal = level.goal;
 	playable = level.playable;
 
@@ -176,6 +176,12 @@ function loadLevel(level_id) {
 
 	drawArena();
 	log("Loaded level #" + (level_id + 1));
+
+	if (!playable.width || !playable.height) {
+		$clear.hide();
+	} else {
+		$clear.show();
+	}
 
 	countPlayedPieces();
 

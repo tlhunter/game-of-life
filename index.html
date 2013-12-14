@@ -6,26 +6,39 @@
 	<body>
 		<h1>Strategic Game of Life</h1>
 		<div id="toolbar">
-			<div id="title">Title: <span>Random Mode</span></div>
-			<div id="generation">Generation: <span>0</span></div>
-			<div id="piececount">Pieces Played: <span>0</span></div>
+			<div id="buttons">
+				<button id="button-play">Play</button>
+				<button id="button-stop" disabled="disabled">Stop</button>
+				<button id="button-clear">Clear</button>
+				<button id="button-level-next" disabled="disabled">Next Level</button>
+				<button id="button-level-prev" disabled="disabled">Previous Level</button>
+			</div>
+			<div id="statistics">
+				<div id="generation">Generation: <span>0</span></div>
+				<div id="piececount">Pieces Played: <span>0</span></div>
+			</div>
 		</div>
-		<div id="buttons">
-			<button id="button-play">Play</button>
-			<button id="button-stop" disabled="disabled">Stop</button>
-			<button id="button-clear">Clear</button>
-			<button id="button-level-next" disabled="disabled">Next Level</button>
-			<button id="button-level-prev" disabled="disabled">Previous Level</button>
-		</div>
-		<div id="description">Page Loading...</div>
-		<div id="gamefield-wrapper">
-			<canvas id="gamefield" width="512" height="512"></canvas>
+		<div id="main-wrapper">
+			<div id="gamefield-wrapper">
+				<canvas id="gamefield" width="512" height="512"></canvas>
+			</div>
+			<div id="library">
+				<div><strong>Library</strong></div>
+				<div class="item"><img src="images/glider.png" /><span class="name">Glider</span></div>
+				<div class="item"><img src="images/spaceship.png" /><span class="name">Spaceship</span></div>
+				<div class="item"><img src="images/pulsar.png" /><span class="name">Pulsar</span></div>
+				<div class="item"><img src="images/still-lifes.png" /><span class="name">Still Lifes</span></div>
+			</div>
+			<div id="description">
+				<div><strong id="title">Page Loading...</strong></div>
+				<div class="text">Page Loading...</div>
+				<div class="footer">
+					You can toggle the cells in the <span style="color: orange;">orange</span> region. Your goal is to turn on the <span style="color: rgb(0,127,255);">blue</span> cell.<br />
+					Created by <a href="http://twitter.com/tlhunter" target="_blank">@tlhunter</a>. Fork on <a href="https://github.com/tlhunter/game-of-life" target="_blank">GitHub</a>. 
+				</div>
+			</div>
 		</div>
 		<div id="console">Page Loading...</div>
-		<div class="footer">
-			You can toggle the cells in the PINK region. Your goal is to turn on the BLUE cell.<br />
-			Created by <a href="http://twitter.com/tlhunter" target="_blank">@tlhunter</a>. Fork on <a href="https://github.com/tlhunter/game-of-life" target="_blank">GitHub</a>. Read more about the <a href="https://en.wikipedia.org/wiki/Conway's_Game_of_Life" target="_blank">Game of Life on WikiPedia</a>.
-		</div>
 	</body>
 	<script src="jquery-1.10.2.min.js"></script>
 	<script src="main.js"></script>
