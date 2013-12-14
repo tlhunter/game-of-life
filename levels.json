@@ -55,7 +55,7 @@
 	},
 
 	{
-		"title": "Tutorial #4: Introducing the Spaceship",
+		"title": "Tutorial #4: Intro to Spaceship",
 		"description": "Gliders are pretty fun (and simple), however, with just a few more pieces cells on the playfield, one can produce a Spaceship! They're like Gliders in the sense that they move, exept they move horizontally and vertically instead of diagnolly.",
 		"introduce": [2,3],
 		"goal": {

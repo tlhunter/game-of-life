@@ -23,6 +23,7 @@ var $clear = null;
 var $prev = null;
 var $next = null;
 var $title = null;
+var $level_counter = null;
 var $desc = null;
 var $gamefield = null;
 var $piece_count = null;
@@ -64,6 +65,7 @@ function setupdom() {
 	$next = $('#button-level-next');
 
 	$title = $('#title');
+	$level_counter = $('#level-counter');
 	$desc = $('#description .text');
 	$generation = $('#generation span');
 	$piece_count = $('#piececount span');
@@ -212,6 +214,7 @@ function loadLevel(level_id) {
 	current_level = level_id;
 
 	$title.text(level.title);
+	$level_counter.text((level_id+1) + "/" + levels.length);
 	$desc.html(level.description);
 	goal = level.goal;
 
