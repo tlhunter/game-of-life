@@ -219,6 +219,12 @@ function loadLevel(level_id) {
 		deadzones = [];
 	}
 
+	if (typeof level.introduce != "undefined") {
+		for (i in level.introduce) {
+			$('#library-' + level.introduce[i]).show();
+		}
+	}
+
 	// Make this the initial state
 	arena_init = arena.slice(0);
 

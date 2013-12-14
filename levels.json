@@ -2,6 +2,7 @@
 	{
 		"title": "Tutorial #1: Watch and Learn",
 		"description": "Welcome to Strategic Game of Life! This is the first tutorial level. Do you see that shape in the middle of the screen? It's called a Glider. Click play and watch what happens.",
+		"introduce": [0],
 		"goal": {
 			"x": 60,
 			"y": 60
@@ -35,6 +36,7 @@
 	{
 		"title": "Tutorial #3: Build more Gliders!",
 		"description": "This time, there's something in the way of your goal! If you draw a Glider in the lower right corner of the playfield, then draw another one to the upper left of it, the first should destroy the barrier, and the second can activate the goal.",
+		"introduce": [1],
 		"goal": {
 			"x": 60,
 			"y": 60
@@ -53,8 +55,9 @@
 	},
 
 	{
-		"title": "Tutorial #4: Introducing the Space Ship",
+		"title": "Tutorial #4: Introducing the Spaceship",
 		"description": "Gliders are pretty fun (and simple), however, with just a few more pieces cells on the playfield, one can produce a Spaceship! They're like Gliders in the sense that they move, exept they move horizontally and vertically instead of diagnolly.",
+		"introduce": [2,3],
 		"goal": {
 			"x": 60,
 			"y": 32
@@ -72,6 +75,7 @@
 	{
 		"title": "Tutorial #5: What is a Glider Gun",
 		"description": "This is another non-interactive level. Just click play and watch what happens. The Game of Life can allow for some complex interactions, and as you're about to see, the results can be quite interesting!",
+		"introduce": [4],
 		"goal": {
 			"x": 60,
 			"y": 46
@@ -87,7 +91,8 @@
 
 	{
 		"title": "Tutorial #6: Multum in Parvo",
-		"description": "This is another non-interactive level. Notice how simple the pattern in the middle of the arena is, and yet, see how complex it can become.",
+		"description": "This is another non-interactive level. Notice how simple the pattern in the middle of the arena is, and yet how unpredictabley complex it can become.",
+		"introduce": [5],
 		"goal": {
 			"x": 32,
 			"y": 2

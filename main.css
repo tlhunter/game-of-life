@@ -18,7 +18,7 @@
 	text-align: center;
 }
 #library .item {
-	display: block;
+	display: none;
 	padding-bottom: 10px;
 }
 #library img {
