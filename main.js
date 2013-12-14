@@ -31,7 +31,8 @@ var colors = {
 	playable:	"rgba(255,127,0, 0.3)",
 	deadzone:	"rgba(127,127,0,0.3)",
 	dead:		"rgb(255,255,255)",
-	alive:		"rgb(0,0,0)"
+	alive:		"rgb(0,0,0)",
+	grid:		"rgba(0,0,0,0.1)",
 }
 
 var current_level = 0; // zero based level system
@@ -295,6 +296,25 @@ function drawArena() {
 			deadzones[i].y * TILE_HEIGHT,
 			deadzones[i].width * TILE_WIDTH,
 			deadzones[i].height * TILE_HEIGHT
+		);
+	}
+
+	context.fillStyle = colors.grid;
+	for (var i = 0; i < CELLS_X; i++) {
+		context.fillRect(
+			i * TILE_WIDTH,
+			0,
+			1,
+			TILE_WIDTH * CELLS_X
+		);
+	}
+		
+	for (var i = 0; i < CELLS_Y; i++) {
+		context.fillRect(
+			0,
+			i * TILE_HEIGHT,
+			TILE_HEIGHT * CELLS_Y,
+			1
 		);
 	}
 }
