@@ -164,5 +164,16 @@
 			}
 		],
 		"arena": [[57,27],[60,27],[56,28],[56,29],[60,29],[56,30],[57,30],[58,30],[59,30]] 
+	},
+
+	{
+		"title": "Impossible?",
+		"description": "This one might not be possible. I haven't beaten it yet, that's for sure.",
+		"goal": {
+			"x": 32,
+			"y": 4
+		},
+		"playables": [{"x":0,"y":48,"width":64,"height":16}],
+		"deadzones": [{"x":0,"y":34,"width":20,"height":4},{"x":44,"y":34,"width":20,"height":4},{"x":24,"y":16,"width":16,"height":4}]
 	}
 ]
