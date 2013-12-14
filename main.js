@@ -29,7 +29,7 @@ var $piece_count = null;
 var current_level = 0; // zero based level system
 var level_earned = 0;
 
-var playable = {};
+var playables = [];
 var deadzones = [];
 
 var goal = {};
@@ -84,15 +84,20 @@ function init() {
 
 		if (playing) {
 			log("Cannot change the game while playing.");
-		} else if (tile.x >= playable.x && tile.y >= playable.y && tile.x < playable.x + playable.width && tile.y < playable.y + playable.height) {
-			arena[tile.y][tile.x] = !arena[tile.y][tile.x];
-			log("Toggled [" + tile.x + ", " + tile.y + "].");
-			countPlayedPieces();
-		} else {
-			log("Position [" + tile.x + ", " + tile.y + "] is outside of the playable (pink) zone.");
+			return;
 		}
 
-		drawArena();
+		for (var i in playables) {
+			if (tile.x >= playables[i].x && tile.y >= playables[i].y && tile.x < playables[i].x + playables[i].width && tile.y < playables[i].y + playables[i].height) {
+				arena[tile.y][tile.x] = !arena[tile.y][tile.x];
+				log("Toggled [" + tile.x + ", " + tile.y + "].");
+				countPlayedPieces();
+				drawArena();
+				return;
+			}
+		}
+
+		log("Position [" + tile.x + ", " + tile.y + "] is outside of the playable (pink) zone.");
 	});
 }
 
@@ -164,10 +169,10 @@ function loadLevel(level_id) {
 	$desc.html(level.description);
 	goal = level.goal;
 
-	if (typeof level.playable != "undefined") {
-		playable = level.playable;
+	if (typeof level.playables != "undefined") {
+		playables = level.playables;
 	} else {
-		playable = {x: 0, y: 0, width: 0, height: 0};
+		playables = [];
 	}
 
 	arena = buildArena(); // Reset arena to nothing
@@ -191,7 +196,7 @@ function loadLevel(level_id) {
 	drawArena();
 	log("Loaded level #" + (level_id + 1));
 
-	if (!playable.width || !playable.height) {
+	if (!playables) {
 		$clear.hide();
 	} else {
 		$clear.show();
@@ -205,10 +210,12 @@ function loadLevel(level_id) {
 function countPlayedPieces() {
 	var counter = 0;
 
-	for (var y = playable.y; y < playable.y + playable.height; y++) {
-		for (var x = playable.x; x < playable.x + playable.width; x++) {
-			if (arena[y][x]) {
-				counter++;
+	for (var i in playables) {
+		for (var y = playables[i].y; y < playables[i].y + playables[i].height; y++) {
+			for (var x = playables[i].x; x < playables[i].x + playables[i].width; x++) {
+				if (arena[y][x]) {
+					counter++;
+				}
 			}
 		}
 	}
@@ -218,9 +225,11 @@ function countPlayedPieces() {
 }
 
 function clear() {
-	for (var y = playable.y; y < playable.y + playable.height; y++) {
-		for (var x = playable.x; x < playable.x + playable.width; x++) {
-			arena[y][x] = false;
+	for (var i in playables) {
+		for (var y = playables[i].y; y < playables[i].y + playables[i].height; y++) {
+			for (var x = playables[i].x; x < playables[i].x + playables[i].width; x++) {
+				arena[y][x] = false;
+			}
 		}
 	}
 
@@ -260,13 +269,13 @@ function drawArena() {
 	}
 
 	// Draw playable zone (if applicable)
-	if (playable.width && playable.height) {
-		context.fillStyle = "rgba(255,127,0, 0.3)";
+	context.fillStyle = "rgba(255,127,0, 0.3)";
+	for (var i in playables) {
 		context.fillRect(
-			playable.x * TILE_WIDTH,
-			playable.y * TILE_HEIGHT,
-			playable.width * TILE_WIDTH,
-			playable.height * TILE_HEIGHT
+			playables[i].x * TILE_WIDTH,
+			playables[i].y * TILE_HEIGHT,
+			playables[i].width * TILE_WIDTH,
+			playables[i].height * TILE_HEIGHT
 		);
 	}
 
@@ -340,12 +349,12 @@ function updateCellState(x, y, new_arena) {
 }
 
 function god() {
-	playable = {
+	playable = [{
 		x:0,
 		y:0,
 		width:CELLS_X,
 		height:CELLS_Y
-	};
+	}];
 
 	drawArena();
 }
