@@ -59,7 +59,24 @@
 	},
 
 	{
-		"title": "Tutorial #4: What is a Glider Gun",
+		"title": "Tutorial #4: Introducing the Space Ship",
+		"description": "Gliders are pretty fun (and simple), however, with just a few more pieces cells on the playfield, one can produce a Spaceship! They're like Gliders in the sense that they move, exept they move horizontally and vertically instead of diagnolly.",
+		"goal": {
+			"x": 60,
+			"y": 32
+		},
+		"playable": {
+			"x": 1,
+			"y": 26,
+			"width": 7,
+			"height": 6
+		},
+		"arena": [[57,11],[58,11],[59,11],[54,14],[55,14],[56,14],[51,17],[52,17],[53,17],[57,17],[58,17],[59,17],[48,20],[49,20],[50,20],[54,20],[55,20],[56,20],[45,23],[46,23],[47,23],[51,23],[52,23],[53,23],[57,23],[58,23],[59,23],[48,26],[49,26],[50,26],[54,26],[55,26],[56,26],[2,27],[5,27],[6,28],[2,29],[6,29],[45,29],[46,29],[47,29],[51,29],[52,29],[53,29],[57,29],[58,29],[59,29],[3,30],[4,30],[5,30],[6,30],[48,32],[49,32],[50,32],[54,32],[55,32],[56,32],[45,35],[46,35],[47,35],[51,35],[52,35],[53,35],[57,35],[58,35],[59,35],[48,38],[49,38],[50,38],[54,38],[55,38],[56,38],[45,41],[46,41],[47,41],[51,41],[52,41],[53,41],[57,41],[58,41],[59,41],[48,44],[49,44],[50,44],[54,44],[55,44],[56,44],[51,47],[52,47],[53,47],[57,47],[58,47],[59,47],[54,50],[55,50],[56,50],[57,53],[58,53],[59,53]]
+
+	},
+
+	{
+		"title": "Tutorial #5: What is a Glider Gun",
 		"description": "This is another non-interactive level. Just click play and watch what happens. The Game of Life can allow for some complex interactions, and as you're about to see, the results can be quite interesting!",
 		"goal": {
 			"x": 60,
@@ -75,7 +92,7 @@
 	},
 
 	{
-		"title": "Tutorial #5: Multum in Parvo",
+		"title": "Tutorial #6: Multum in Parvo",
 		"description": "This is another non-interactive level. Notice how simple the pattern in the middle of the arena is, and yet, see how complex it can become.",
 		"goal": {
 			"x": 32,
