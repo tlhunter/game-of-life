@@ -238,7 +238,7 @@ function loadLevel(level_id) {
 	generations_until_beaten = 0;
 	current_level = level_id;
 
-	$title.text(level.title);
+	$title.html(level.title);
 	$level_counter.text((level_id+1) + "/" + levels.length);
 	$desc.html(level.description);
 	goal = level.goal;
