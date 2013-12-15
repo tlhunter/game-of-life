@@ -1,24 +1,31 @@
-#gamefield-wrapper {
-	background-color: orange;
+/* Annoying text selection cursor while dragging over canvas :'( */
+body {
+	user-select: none;
+	-webkit-user-select: none;
+	cursor: default; /* might as well hide text selection cursor since you can't select it now */
+	font-family: Georgia;
+	font-size: 15px;
+}
+/*#library, #statistics, #console, #description {
+	user-select: initial;
+	-webkit-user-select: initial;
+}*/
+#center-column {
 	margin: 0 10px;
+	padding: 4px;
+	float: left;
 }
 #gamefield {
 	cursor: crosshair;
 	cursor: none;
 }
 #main-wrapper {
-	height: 520px;
 	width: 1140px;
 	margin: 0 auto;
 }
-#gamefield-wrapper {
-	padding: 4px;
-	float: left;
-}
 #library {
-	height: 520px;
 	float: left;
-	width: 160px;
+	width: 150px;
 	margin-left: 140px;
 	text-align: center;
 	overflow-y: auto;
@@ -27,8 +34,6 @@
 	display: none;
 	padding-bottom: 10px;
 }
-#library img {
-}
 #library .name {
 	display: block;
 	font-size: 13px;
@@ -36,9 +41,12 @@
 }
 #description {
 	width: 300px;
-	height: 520px;
 	float: left;
 	position: relative;
+	font-size: 14px;
+}
+#description, #library {
+	height: 556px;
 }
 #description .text {
 	padding-top: 10px;
@@ -47,6 +55,15 @@
 #description .footer {
 	position: absolute;
 	bottom: 0px;
+	background-color: #ffc;
+	padding: 4px 7px;
+	border-radius: 6;
+	font-size: 13px;
+	width: 100%;
+}
+#gamefield-wrapper {
+	background-color: orange;
+	padding: 4px;
 }
 #gamefield-wrapper.won {
 	background-color: lime;
@@ -69,16 +86,6 @@
 	color: white;
 	text-align: right;
 }
-/* Annoying text selection cursor while dragging over canvas :'( */
-body {
-	user-select: none;
-	-webkit-user-select: none;
-	cursor: default; /* might as well hide text selection cursor since you can't select it now */
-}
-/*#library, #statistics, #console, #description {
-	user-select: initial;
-	-webkit-user-select: initial;
-}*/
 #console {
 	clear: both;
 	background-color: #000;
@@ -90,12 +97,24 @@ body {
 	border-bottom-left-radius: 4px;
 	border-bottom-right-radius: 4px;
 }
-#console, #toolbar {
-	margin-left: 310px;
-}
+/*#console, #toolbar {*/
+	/*margin-left: 310px;*/
+/*}*/
 #button-level-prev {
 	display: none;
 }
-h1 {
+h1, h2 {
 	text-align: center;
+	font-size: 21px;
+	font-family: "Courier New";
+	margin: 0px; padding: 4px 0;
+	height: 36px;
+	line-height: 36px;
+	overflow: hidden;
+}
+h2 {
+	font-size: 16px;
+}
+#level-info {
+	padding-bottom: 8px;
 }

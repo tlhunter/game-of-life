@@ -36,7 +36,7 @@ var colors = {
 	dead:		"rgb(255,255,255)",
 	alive:		"rgb(0,0,0)",
 	grid:		"rgba(0,0,0,0.1)",
-	hover:		"rgba(0,0,0,0.5)",
+	hover:		"rgba(63,0,127,0.5)",
 }
 
 var current_level = 0; // zero based level system

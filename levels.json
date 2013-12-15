@@ -1,7 +1,7 @@
 [
 	{
 		"title": "Tutorial #1: Watch and Learn",
-		"description": "Welcome to Strategic Game of Life! This is the first tutorial level. The entire Game of Life is governed by the following four rules: <ol><li>Any live cell with fewer than two live neighbours dies.</li><li>Any live cell with two or three live neighbours lives.</li><li>Any live cell with more than three live neighbours dies.</li><li>Any dead cell with exactly three live neighbours becomes a live cell.</li></ol>Do you see that shape in the middle of the screen? It's called a Glider. Click play and watch what happens.",
+		"description": "Welcome to Strategic Game of Life! This is the first tutorial level. The entire Game of Life is governed by the following four rules: <ol><li>Any live cell with fewer than two live neighbours dies.</li><li>Any live cell with two or three live neighbours lives.</li><li>Any live cell with more than three live neighbours dies.</li><li>Any dead cell with exactly three live neighbours becomes a live cell.</li></ol>If you're interested in learning more, read about the <a href=\"https://en.wikipedia.org/wiki/Conway's_Game_of_Life\" target=\"_blank\">Game of Life on WikiPedia</a>.<br /><br />Do you see that shape in the middle of the screen? It's called a Glider. Click play and watch what happens.",
 		"introduce": [0],
 		"goal": { "x": 60, "y": 60 },
 		"arena": [ [30,30], [31,30], [32,30], [32,29], [31,28] ]
@@ -9,14 +9,14 @@
 
 	{
 		"title": "Tutorial #2: Now you Try",
-		"description": "The Game of Life is a very simple simulation. The rules are very simple (read about the <a href=\"https://en.wikipedia.org/wiki/Conway's_Game_of_Life\" target=\"_blank\">Game of Life on WikiPedia</a>). For now, draw that same Glider you saw before and click play. Your goal is to hit the Blue square.",
+		"description": "Now that you kinda have a feel for how the game works, and you've seen a simulation in action, try to recreate that same shape you saw in the previous level. For your convenience, the shape has been added to your library.<br /><br />Every pattern you discover in the Game of Life can always be rotated 90&deg; or even flipped horizontally or vertically and will still work the same (although, if the patterns move, they will move in a different direction).",
 		"goal": { "x": 60, "y": 60 },
 		"playables": [{ "x": 24, "y": 24, "width": 16, "height": 16 }]
 	},
 
 	{
 		"title": "Tutorial #3: Build more Gliders!",
-		"description": "This time, there's something in the way of your goal! If you draw a Glider in the lower right corner of the playfield, then draw another one to the upper left of it, the first should destroy the barrier, and the second can activate the goal.",
+		"description": "This time, there's something in the way of your goal! This simple shape is called a Blinker, and will flip between being horizontal and vertical. Since there are two \"frames\" of this animation, it can be thought of as a <strong>Period 2 Oscillator</strong>.<br /><br />If you draw a Glider in the lower right corner of the playfield, then draw another one to the upper left of it, the first should destroy the barrier, and the second can activate the goal.",
 		"introduce": [1],
 		"goal": { "x": 60, "y": 60 },
 		"playables": [{ "x": 24, "y": 24, "width": 16, "height": 16 }],
@@ -25,7 +25,7 @@
 
 	{
 		"title": "Tutorial #4: Intro to Spaceship",
-		"description": "Gliders are pretty fun (and simple), however, with just a few more pieces cells on the playfield, one can produce a Spaceship! They're like Gliders in the sense that they move, exept they move horizontally and vertically instead of diagnolly.",
+		"description": "Gliders are pretty fun (and simple), however by playing a few more cells on the playfield, one can produce a Spaceship! They're like Gliders in the sense that they move, exept they move horizontally and vertically instead of diagnolly.<br /><br />You'll notice something a bit different happens after this level is done. Once the Spaceship crashes into the Blinkers, a chain reaction happens and the goal is activated. This chain reaction is how you will end up solving many of the levels in this game.<br /><br />You'll also notice some debris left on the field which don't move. We call these Still-Lifes, and they are a common phenomenon of the Game of Life.",
 		"introduce": [2,3],
 		"goal": { "x": 60, "y": 32 },
 		"playables": [{ "x": 1, "y": 26, "width": 7, "height": 6 }],
@@ -94,14 +94,6 @@
 	},
 
 	{
-		"title": "Getting Difficult",
-		"description": "This one looks pretty difficult. You can't simply send a spaceship up and crash it into the wall and spawn a glider, as the horizontal gap is too small. As a hint, I was able to beat this on Generation 432 with 20 Pieces Played.",
-		"goal": { "x": 32, "y": 4 },
-		"playables": [{"x":0,"y":48,"width":64,"height":16}],
-		"deadzones": [{"x":0,"y":34,"width":20,"height":4},{"x":44,"y":34,"width":20,"height":4},{"x":24,"y":16,"width":16,"height":4}]
-	},
-
-	{
 		"title": "Abaddon: Destroyer of Worlds",
 		"description": "Remember that Glider Gun you saw a while ago? Well, it's back! Unfortunately, there's an Eater preventing any gliders from hitting the goal. An Eater, when placed just right, will destroy a Glider and retain its shape.",
 		"introduce": [7],
@@ -142,7 +134,7 @@
 	},
 
 	{
-		"title": "Circumnavigationamatoria",
+		"title": "Orion's Belt",
 		"description": "This crazy three pronged spaceship is called an Orion 2, and is moving towards the upper left corner of the arena, which is where your spawn is! Can you get past it and activate the goal?",
 		"introduce": [10],
 		"goal": { "x": 59, "y": 59 },
@@ -158,5 +150,13 @@
 		"deadzones": [ { "x": 22, "y": 12, "width": 13, "height": 1 } ],
 		"playables": [ { "x": 22, "y": 0, "width": 13, "height": 12 } ],
 		"arena": [ [ 28, 28 ], [ 27, 29 ], [ 29, 29 ], [ 27, 30 ], [ 29, 30 ], [ 26, 31 ], [ 27, 31 ], [ 29, 31 ], [ 30, 31 ], [ 26, 38 ], [ 27, 38 ], [ 29, 38 ], [ 30, 38 ], [ 27, 39 ], [ 29, 39 ], [ 27, 40 ], [ 29, 40 ], [ 27, 41 ], [ 29, 41 ], [ 28, 42 ] ]
+	},
+
+	{
+		"title": "Getting Difficult",
+		"description": "This one looks pretty difficult. You can't simply send a spaceship up and crash it into the wall and spawn a glider, as the horizontal gap is too small. As a hint, I was able to beat this on Generation 432 with 20 Pieces Played.",
+		"goal": { "x": 32, "y": 4 },
+		"playables": [{"x":0,"y":48,"width":64,"height":16}],
+		"deadzones": [{"x":0,"y":34,"width":20,"height":4},{"x":44,"y":34,"width":20,"height":4},{"x":24,"y":16,"width":16,"height":4}]
 	}
 ]

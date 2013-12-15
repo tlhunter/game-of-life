@@ -4,23 +4,9 @@
 		<link rel="stylesheet" type="text/css" href="main.css">
 	</head>
 	<body>
-		<h1>Strategic Game of Life</h1>
 		<div id="main-wrapper">
-			<div id="toolbar">
-				<div id="buttons">
-					<button id="button-play" title="Play the level (Space)">Play</button>
-					<button id="button-stop" disabled="disabled" title="Stop the level (Space)">Stop</button>
-					<button id="button-clear" title="Clear the Play Acrea (C)">Clear</button>
-					<button id="button-level-next" disabled="disabled" title="Load the Next Level (N)">Next Level</button>
-					<button id="button-level-prev" disabled="disabled">Previous Level</button>
-				</div>
-				<div id="statistics">
-					<div id="generation">Generation: <span>0</span></div>
-					<div id="piececount">Pieces Played: <span>0</span></div>
-				</div>
-			</div>
 			<div id="library">
-				<div><strong>Library</strong></div>
+				<h2>Library</h2>
 				<div id="library-0" class="item"><img src="images/glider.png" /><span class="name"><a href="http://www.conwaylife.com/wiki/Glider" target="_blank">Glider (45&deg;)</a></span></div>
 				<div id="library-1" class="item"><img src="images/pulsar.png" /><span class="name"><a href="http://www.conwaylife.com/wiki/Blinker" target="_blank">Blinker</a></span></div>
 				<div id="library-2" class="item"><img src="images/spaceship.png" /><span class="name"><a href="http://www.conwaylife.com/wiki/Spaceship" target="_blank">Spaceship (90&deg;)</a></span></div>
@@ -33,19 +19,36 @@
 				<div id="library-9" class="item"><img src="images/gliders-by-the-dozen.png" /><span class="name"><a href="http://www.conwaylife.com/wiki/Gliders_by_the_dozen" target="_blank">Gliders by the Dozen</a></span></div>
 				<div id="library-10" class="item"><img src="images/orion-2.png" /><span class="name"><a href="http://www.conwaylife.com/wiki/Orion_2" target="_blank">Orion 2</a></span></div>
 			</div>
-			<div id="gamefield-wrapper">
-				<canvas id="gamefield" width="512" height="512"></canvas>
+			<div id="center-column">
+				<div id="toolbar">
+					<div id="buttons">
+						<button id="button-play" title="Play the level (Space)">Play</button>
+						<button id="button-stop" disabled="disabled" title="Stop the level (Space)">Stop</button>
+						<button id="button-clear" title="Clear the Play Acrea (C)">Clear</button>
+						<button id="button-level-next" disabled="disabled" title="Load the Next Level (N)">Next Level</button>
+						<button id="button-level-prev" disabled="disabled">Previous Level</button>
+					</div>
+					<div id="statistics">
+						<div id="generation">Generation: <span>0</span></div>
+						<div id="piececount">Cells in Play: <span>0</span></div>
+					</div>
+				</div>
+				<div id="gamefield-wrapper">
+					<canvas id="gamefield" width="512" height="512"></canvas>
+				</div>
+				<div id="console">Page Loading...</div>
 			</div>
 			<div id="description">
-				<div>Level <span id="level-counter"></span>: <strong id="title">Page Loading...</strong></div>
+				<h1>Strategic Game of Life</h1>
+				<div id="level-info">[<span id="level-counter"></span>]: <strong id="title">Page Loading...</strong></div>
 				<div class="text">Page Loading...</div>
 				<div class="footer">
-					You can toggle the cells in the <span style="color: #ffd9b2;">orange</span> region. Your goal is to activate the <span style="color: rgb(0,127,255);">blue</span> cell.<br />
+					You can toggle the cells in the <span style="color: #ffd9b2;">orange</span> region.<br />
+					Your goal is to activate the <span style="color: rgb(0,127,255);">blue</span> cell.<br />
 					Created by <a href="http://twitter.com/tlhunter" target="_blank">@tlhunter</a>. Fork on <a href="https://github.com/tlhunter/game-of-life" target="_blank">GitHub</a>.<br />
 					<br /><strong>SPACE</strong>: Toggle Play/Stop<br /><strong>N</strong>: Load Next Level<br /><strong>C</strong>: Clear Playable Area
 				</div>
 			</div>
-			<div id="console">Page Loading...</div>
 		</div>
 	</body>
 	<script src="jquery-1.10.2.min.js"></script>
