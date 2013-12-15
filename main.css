@@ -17,8 +17,8 @@
 #library {
 	height: 520px;
 	float: left;
-	width: 128px;
-	margin-left: 172px; /* ML + W = 300 (#description width) */
+	width: 160px;
+	margin-left: 140px;
 	text-align: center;
 	overflow-y: auto;
 }
