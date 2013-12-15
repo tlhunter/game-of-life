@@ -16,6 +16,7 @@ var redraw = null;
 var playing = false;
 var generations_until_beaten = 0;
 var drawstate = null;
+var lastKnownHoverPos = {x:null,y:null};
 
 var $play = null;
 var $stop = null;
@@ -35,6 +36,7 @@ var colors = {
 	dead:		"rgb(255,255,255)",
 	alive:		"rgb(0,0,0)",
 	grid:		"rgba(0,0,0,0.1)",
+	hover:		"rgba(0,0,0,0.5)",
 }
 
 var current_level = 0; // zero based level system
@@ -115,7 +117,24 @@ function init() {
 		setTile(tile, drawstate)
 	});
 	$gamefield.on('mousemove', function (event) {
-		if (drawstate === null) return;
+		if (drawstate === null) {
+			var pos = eventPos(event);
+
+			// Don't want to needlessly redraw the arena with every pixel move of the mouse, just the tile move of a mouse
+			if (pos.x == lastKnownHoverPos.x && pos.y == lastKnownHoverPos.y) {
+				return;
+			}
+
+			lastKnownHoverPos = {
+				x: pos.x,
+				y: pos.y
+			};
+
+			drawArena();
+			context.fillStyle = colors.hover;
+			context.fillRect(pos.x * TILE_WIDTH, pos.y * TILE_HEIGHT, 1 * TILE_WIDTH, 1 * TILE_HEIGHT);
+			return;
+		}
 		setTile(eventPos(event), drawstate);
 	});
 	$gamefield.on('mouseup', function () {

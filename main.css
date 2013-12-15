@@ -4,6 +4,7 @@
 }
 #gamefield {
 	cursor: crosshair;
+	cursor: none;
 }
 #main-wrapper {
 	height: 520px;
@@ -68,10 +69,16 @@
 	color: white;
 	text-align: right;
 }
-#toolbar, #gamefield-wrapper {
+/* Annoying text selection cursor while dragging over canvas :'( */
+body {
 	user-select: none;
 	-webkit-user-select: none;
+	cursor: default; /* might as well hide text selection cursor since you can't select it now */
 }
+/*#library, #statistics, #console, #description {
+	user-select: initial;
+	-webkit-user-select: initial;
+}*/
 #console {
 	clear: both;
 	background-color: #000;
