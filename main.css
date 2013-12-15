@@ -20,6 +20,7 @@
 	width: 128px;
 	margin-left: 172px; /* ML + W = 300 (#description width) */
 	text-align: center;
+	overflow-y: auto;
 }
 #library .item {
 	display: none;
