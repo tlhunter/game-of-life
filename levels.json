@@ -3,89 +3,41 @@
 		"title": "Tutorial #1: Watch and Learn",
 		"description": "Welcome to Strategic Game of Life! This is the first tutorial level. Do you see that shape in the middle of the screen? It's called a Glider. Click play and watch what happens.",
 		"introduce": [0],
-		"goal": {
-			"x": 60,
-			"y": 60
-		},
-		"arena": [
-			[30,30],
-			[31,30],
-			[32,30],
-			[32,29],
-			[31,28]
-		]
+		"goal": { "x": 60, "y": 60 },
+		"arena": [ [30,30], [31,30], [32,30], [32,29], [31,28] ]
 	},
 
 	{
 		"title": "Tutorial #2: Now you Try",
 		"description": "The Game of Life is a very simple simulation. The rules are very simple (read about the <a href=\"https://en.wikipedia.org/wiki/Conway's_Game_of_Life\" target=\"_blank\">Game of Life on WikiPedia</a>). For now, draw that same Glider you saw before and click play. Your goal is to hit the Blue square.",
-		"goal": {
-			"x": 60,
-			"y": 60
-		},
-		"playables": [{
-			"x": 24,
-			"y": 24,
-			"width": 16,
-			"height": 16 
-		}],
-		"arena": [
-		]
+		"goal": { "x": 60, "y": 60 },
+		"playables": [{ "x": 24, "y": 24, "width": 16, "height": 16 }]
 	},
 
 	{
 		"title": "Tutorial #3: Build more Gliders!",
 		"description": "This time, there's something in the way of your goal! If you draw a Glider in the lower right corner of the playfield, then draw another one to the upper left of it, the first should destroy the barrier, and the second can activate the goal.",
 		"introduce": [1],
-		"goal": {
-			"x": 60,
-			"y": 60
-		},
-		"playables": [{
-			"x": 24,
-			"y": 24,
-			"width": 16,
-			"height": 16 
-		}],
-		"arena": [
-			[57,57],
-			[57,58],
-			[57,59]
-		]
+		"goal": { "x": 60, "y": 60 },
+		"playables": [{ "x": 24, "y": 24, "width": 16, "height": 16 }],
+		"arena": [ [57,57], [57,58], [57,59] ]
 	},
 
 	{
 		"title": "Tutorial #4: Intro to Spaceship",
 		"description": "Gliders are pretty fun (and simple), however, with just a few more pieces cells on the playfield, one can produce a Spaceship! They're like Gliders in the sense that they move, exept they move horizontally and vertically instead of diagnolly.",
 		"introduce": [2,3],
-		"goal": {
-			"x": 60,
-			"y": 32
-		},
-		"playables": [{
-			"x": 1,
-			"y": 26,
-			"width": 7,
-			"height": 6
-		}],
+		"goal": { "x": 60, "y": 32 },
+		"playables": [{ "x": 1, "y": 26, "width": 7, "height": 6 }],
 		"arena": [[57,11],[58,11],[59,11],[54,14],[55,14],[56,14],[51,17],[52,17],[53,17],[57,17],[58,17],[59,17],[48,20],[49,20],[50,20],[54,20],[55,20],[56,20],[45,23],[46,23],[47,23],[51,23],[52,23],[53,23],[57,23],[58,23],[59,23],[48,26],[49,26],[50,26],[54,26],[55,26],[56,26],[2,27],[5,27],[6,28],[2,29],[6,29],[45,29],[46,29],[47,29],[51,29],[52,29],[53,29],[57,29],[58,29],[59,29],[3,30],[4,30],[5,30],[6,30],[48,32],[49,32],[50,32],[54,32],[55,32],[56,32],[45,35],[46,35],[47,35],[51,35],[52,35],[53,35],[57,35],[58,35],[59,35],[48,38],[49,38],[50,38],[54,38],[55,38],[56,38],[45,41],[46,41],[47,41],[51,41],[52,41],[53,41],[57,41],[58,41],[59,41],[48,44],[49,44],[50,44],[54,44],[55,44],[56,44],[51,47],[52,47],[53,47],[57,47],[58,47],[59,47],[54,50],[55,50],[56,50],[57,53],[58,53],[59,53]]
-
 	},
 
 	{
 		"title": "Tutorial #5: What is a Glider Gun",
 		"description": "This is another non-interactive level. Just click play and watch what happens. The Game of Life can allow for some complex interactions, and as you're about to see, the results can be quite interesting!",
 		"introduce": [4],
-		"goal": {
-			"x": 60,
-			"y": 46
-		},
-		"playables": [{
-			"x": 24,
-			"y": 24,
-			"width": 0,
-			"height": 0 
-		}],
+		"goal": { "x": 60, "y": 46 },
+		"playables": [{ "x": 24, "y": 24, "width": 0, "height": 0 }],
 		"arena": [[25,1],[23,2],[25,2],[13,3],[14,3],[21,3],[22,3],[35,3],[36,3],[12,4],[16,4],[21,4],[22,4],[35,4],[36,4],[1,5],[2,5],[11,5],[17,5],[21,5],[22,5],[1,6],[2,6],[11,6],[15,6],[17,6],[18,6],[23,6],[25,6],[11,7],[17,7],[25,7],[12,8],[16,8],[13,9],[14,9]]
 	},
 
@@ -93,84 +45,39 @@
 		"title": "Tutorial #6: Multum in Parvo",
 		"description": "This is another non-interactive level. Notice how simple the pattern in the middle of the arena is, and yet how unpredictabley complex it can become.",
 		"introduce": [5],
-		"goal": {
-			"x": 32,
-			"y": 2
-		},
+		"goal": { "x": 32, "y": 2 },
 		"arena": [[32,29],[33,29],[34,29],[31,30],[34,30],[30,31],[29,32]]
 	},
 
 	{
 		"title": "First Real Mission",
 		"description": "Alright, it's time for your first real mission! Try to tear your way through the barrier and get to the goal!",
-		"goal": {
-			"x": 32,
-			"y": 2
-		},
-		"playables": [{
-			"x": 0,
-			"y": 48,
-			"width": 64,
-			"height": 16 
-		}],
-		"arena": [
-			[32,6],
-			[32,7],
-			[32,8],
-			[29,6],
-			[29,7],
-			[29,8],
-			[35,6],
-			[35,7],
-			[35,8]
-		]
+		"goal": { "x": 32, "y": 2 },
+		"playables": [{ "x": 24, "y": 48, "width": 16, "height": 16 }],
+		"arena": [ [32,6], [32,7], [32,8], [29,6], [29,7], [29,8], [35,6], [35,7], [35,8] ]
+	},
+
+	{
+		"title": "Second Real Mission",
+		"description": "This mission is a lot like the last one, except that the playable area has changed quite a bit. Can you dig it?",
+		"goal": { "x": 32, "y": 2 },
+		"playables": [{ "x": 0, "y": 48, "width": 16, "height": 16 }, { "x": 48, "y": 48, "width": 16, "height": 16 }],
+		"arena": [ [32,6], [32,7], [32,8], [29,6], [29,7], [29,8], [35,6], [35,7], [35,8] ]
 	},
 
 	{
 		"title": "Hookshot",
 		"description": "Notice the green zones. These are Dead Zones. No cells will become alive in these zones, so you'll have to find a way to get around them. As a hint, see what happens when that Spaceship crashes into a wall... And remember, everything in the library can be rotated and flipped.",
-		"goal": {
-			"x": 3,
-			"y": 20
-		},
-		"playables": [
-			{
-				"x": 0,
-				"y": 48,
-				"width": 32,
-				"height": 16
-			},
-			{
-				"x": 56,
-				"y": 26,
-				"width": 8,
-				"height": 8
-			}
-		],
-		"deadzones": [
-			{
-				"x": 0,
-				"y": 22,
-				"width": 16,
-				"height": 4
-			},
-			{
-				"x": 48,
-				"y": 22,
-				"width": 16,
-				"height": 4
-			}
-		],
+		"goal": { "x": 3, "y": 20 },
+		"playables": [ { "x": 0, "y": 48, "width": 32, "height": 16 }, { "x": 56, "y": 26, "width": 8, "height": 8 } ],
+		"deadzones": [ { "x": 0, "y": 22, "width": 16, "height": 4 }, { "x": 48, "y": 22, "width": 16, "height": 4 } ],
 		"arena": [[57,27],[60,27],[56,28],[56,29],[60,29],[56,30],[57,30],[58,30],[59,30]] 
 	},
 
 	{
 		"title": "Flock of Gliders",
 		"description": "This one is pretty easy. It's a lot like the last one.",
-		"goal": {
-			"x": 59,
-			"y": 4
-		},
+		"goal": { "x": 59, "y": 4 },
 		"deadzones": [{"x":51,"y":2,"width":2,"height":5}],
 		"playables": [{"x":0,"y":0,"width":32,"height":16}],
 		"arena": [[27,18],[28,18],[29,18],[29,19],[28,20],[8,23],[9,23],[10,23],[10,24],[9,25],[12,28],[13,28],[14,28],[1,29],[2,29],[3,29],[14,29],[21,29],[22,29],[23,29],[3,30],[13,30],[23,30],[2,31],[22,31],[27,31],[28,31],[29,31],[29,32],[28,33],[6,36],[7,36],[8,36],[20,36],[21,36],[22,36],[8,37],[22,37],[30,37],[31,37],[32,37],[7,38],[21,38],[32,38],[31,39],[26,44],[27,44],[28,44],[28,45],[27,46],[7,47],[8,47],[9,47],[9,48],[40,48],[41,48],[42,48],[8,49],[42,49],[41,50],[19,55],[20,55],[21,55],[21,56],[20,57]]
@@ -180,279 +87,16 @@
 	  "title": "Pentadecathlon",
 	  "description": "Lots of stuff going on here. Just remember that you can often just throw a glider into the chaos and things work themselves out.",
 	  "introduce": [6],
-	  "goal": {
-		"x": 34,
-		"y": 7
-	  },
-	  "deadzones": [
-		{
-		  "x": 32,
-		  "y": 0,
-		  "width": 1,
-		  "height": 10
-		},
-		{
-		  "x": 33,
-		  "y": 9,
-		  "width": 2,
-		  "height": 1
-		}
-	  ],
-	  "playables": [
-		{
-		  "x": 0,
-		  "y": 0,
-		  "width": 8,
-		  "height": 64
-		}
-	  ],
-	  "arena": [
-		[
-		  34,
-		  2
-		],
-		[
-		  34,
-		  3
-		],
-		[
-		  37,
-		  3
-		],
-		[
-		  38,
-		  3
-		],
-		[
-		  39,
-		  3
-		],
-		[
-		  44,
-		  3
-		],
-		[
-		  50,
-		  3
-		],
-		[
-		  51,
-		  3
-		],
-		[
-		  52,
-		  3
-		],
-		[
-		  58,
-		  3
-		],
-		[
-		  34,
-		  4
-		],
-		[
-		  44,
-		  4
-		],
-		[
-		  58,
-		  4
-		],
-		[
-		  43,
-		  5
-		],
-		[
-		  45,
-		  5
-		],
-		[
-		  57,
-		  5
-		],
-		[
-		  59,
-		  5
-		],
-		[
-		  36,
-		  6
-		],
-		[
-		  44,
-		  6
-		],
-		[
-		  58,
-		  6
-		],
-		[
-		  36,
-		  7
-		],
-		[
-		  44,
-		  7
-		],
-		[
-		  58,
-		  7
-		],
-		[
-		  36,
-		  8
-		],
-		[
-		  44,
-		  8
-		],
-		[
-		  58,
-		  8
-		],
-		[
-		  44,
-		  9
-		],
-		[
-		  58,
-		  9
-		],
-		[
-		  43,
-		  10
-		],
-		[
-		  45,
-		  10
-		],
-		[
-		  57,
-		  10
-		],
-		[
-		  59,
-		  10
-		],
-		[
-		  44,
-		  11
-		],
-		[
-		  50,
-		  11
-		],
-		[
-		  51,
-		  11
-		],
-		[
-		  52,
-		  11
-		],
-		[
-		  58,
-		  11
-		],
-		[
-		  44,
-		  12
-		],
-		[
-		  58,
-		  12
-		],
-		[
-		  44,
-		  18
-		],
-		[
-		  48,
-		  18
-		],
-		[
-		  49,
-		  18
-		],
-		[
-		  53,
-		  18
-		],
-		[
-		  54,
-		  18
-		],
-		[
-		  58,
-		  18
-		],
-		[
-		  43,
-		  19
-		],
-		[
-		  45,
-		  19
-		],
-		[
-		  47,
-		  19
-		],
-		[
-		  50,
-		  19
-		],
-		[
-		  52,
-		  19
-		],
-		[
-		  55,
-		  19
-		],
-		[
-		  57,
-		  19
-		],
-		[
-		  59,
-		  19
-		],
-		[
-		  44,
-		  20
-		],
-		[
-		  48,
-		  20
-		],
-		[
-		  49,
-		  20
-		],
-		[
-		  53,
-		  20
-		],
-		[
-		  54,
-		  20
-		],
-		[
-		  58,
-		  20
-		]
-	  ]
+	  "goal": { "x": 34, "y": 7 },
+	  "deadzones": [ { "x": 32, "y": 0, "width": 1, "height": 10 }, { "x": 33, "y": 9, "width": 2, "height": 1 } ],
+	  "playables": [ { "x": 0, "y": 0, "width": 8, "height": 64 } ],
+	  "arena": [ [ 34, 2 ], [ 34, 3 ], [ 37, 3 ], [ 38, 3 ], [ 39, 3 ], [ 44, 3 ], [ 50, 3 ], [ 51, 3 ], [ 52, 3 ], [ 58, 3 ], [ 34, 4 ], [ 44, 4 ], [ 58, 4 ], [ 43, 5 ], [ 45, 5 ], [ 57, 5 ], [ 59, 5 ], [ 36, 6 ], [ 44, 6 ], [ 58, 6 ], [ 36, 7 ], [ 44, 7 ], [ 58, 7 ], [ 36, 8 ], [ 44, 8 ], [ 58, 8 ], [ 44, 9 ], [ 58, 9 ], [ 43, 10 ], [ 45, 10 ], [ 57, 10 ], [ 59, 10 ], [ 44, 11 ], [ 50, 11 ], [ 51, 11 ], [ 52, 11 ], [ 58, 11 ], [ 44, 12 ], [ 58, 12 ], [ 44, 18 ], [ 48, 18 ], [ 49, 18 ], [ 53, 18 ], [ 54, 18 ], [ 58, 18 ], [ 43, 19 ], [ 45, 19 ], [ 47, 19 ], [ 50, 19 ], [ 52, 19 ], [ 55, 19 ], [ 57, 19 ], [ 59, 19 ], [ 44, 20 ], [ 48, 20 ], [ 49, 20 ], [ 53, 20 ], [ 54, 20 ], [ 58, 20 ] ]
 	},
 
 	{
 		"title": "Getting Difficult",
 		"description": "This one looks pretty difficult. You can't simply send a spaceship up and crash it into the wall and spawn a glider, as the horizontal gap is too small. As a hint, I was able to beat this on Generation 432 with 20 Pieces Played.",
-		"goal": {
-			"x": 32,
-			"y": 4
-		},
+		"goal": { "x": 32, "y": 4 },
 		"playables": [{"x":0,"y":48,"width":64,"height":16}],
 		"deadzones": [{"x":0,"y":34,"width":20,"height":4},{"x":44,"y":34,"width":20,"height":4},{"x":24,"y":16,"width":16,"height":4}]
 	},
@@ -461,212 +105,9 @@
 	  "title": "Abaddon: Destroyer of Worlds",
 	  "description": "Remember that Glider Gun you saw a while ago? Well, it's back! Unfortunately, there's an Eater preventing any gliders from hitting the goal. An Eater, when placed just right, will destroy a Glider and retain its shape.",
 	  "introduce": [7],
-	  "goal": {
-		"x": 60,
-		"y": 46
-	  },
+	  "goal": { "x": 60, "y": 46 },
 	  "deadzones": [],
-	  "playables": [
-		{
-		  "x": 0,
-		  "y": 24,
-		  "width": 8,
-		  "height": 8
-		}
-	  ],
-	  "arena": [
-		[
-		  25,
-		  1
-		],
-		[
-		  23,
-		  2
-		],
-		[
-		  25,
-		  2
-		],
-		[
-		  13,
-		  3
-		],
-		[
-		  14,
-		  3
-		],
-		[
-		  21,
-		  3
-		],
-		[
-		  22,
-		  3
-		],
-		[
-		  35,
-		  3
-		],
-		[
-		  36,
-		  3
-		],
-		[
-		  12,
-		  4
-		],
-		[
-		  16,
-		  4
-		],
-		[
-		  21,
-		  4
-		],
-		[
-		  22,
-		  4
-		],
-		[
-		  35,
-		  4
-		],
-		[
-		  36,
-		  4
-		],
-		[
-		  1,
-		  5
-		],
-		[
-		  2,
-		  5
-		],
-		[
-		  11,
-		  5
-		],
-		[
-		  17,
-		  5
-		],
-		[
-		  21,
-		  5
-		],
-		[
-		  22,
-		  5
-		],
-		[
-		  1,
-		  6
-		],
-		[
-		  2,
-		  6
-		],
-		[
-		  11,
-		  6
-		],
-		[
-		  15,
-		  6
-		],
-		[
-		  17,
-		  6
-		],
-		[
-		  18,
-		  6
-		],
-		[
-		  23,
-		  6
-		],
-		[
-		  25,
-		  6
-		],
-		[
-		  11,
-		  7
-		],
-		[
-		  17,
-		  7
-		],
-		[
-		  25,
-		  7
-		],
-		[
-		  12,
-		  8
-		],
-		[
-		  16,
-		  8
-		],
-		[
-		  13,
-		  9
-		],
-		[
-		  14,
-		  9
-		],
-		[
-		  45,
-		  39
-		],
-		[
-		  46,
-		  39
-		],
-		[
-		  45,
-		  40
-		],
-		[
-		  46,
-		  40
-		],
-		[
-		  50,
-		  40
-		],
-		[
-		  49,
-		  41
-		],
-		[
-		  51,
-		  41
-		],
-		[
-		  50,
-		  42
-		],
-		[
-		  52,
-		  42
-		],
-		[
-		  52,
-		  43
-		],
-		[
-		  52,
-		  44
-		],
-		[
-		  53,
-		  44
-		]
-	  ]
+	  "playables": [ { "x": 0, "y": 24, "width": 8, "height": 8 } ],
+	  "arena": [ [ 25, 1 ], [ 23, 2 ], [ 25, 2 ], [ 13, 3 ], [ 14, 3 ], [ 21, 3 ], [ 22, 3 ], [ 35, 3 ], [ 36, 3 ], [ 12, 4 ], [ 16, 4 ], [ 21, 4 ], [ 22, 4 ], [ 35, 4 ], [ 36, 4 ], [ 1, 5 ], [ 2, 5 ], [ 11, 5 ], [ 17, 5 ], [ 21, 5 ], [ 22, 5 ], [ 1, 6 ], [ 2, 6 ], [ 11, 6 ], [ 15, 6 ], [ 17, 6 ], [ 18, 6 ], [ 23, 6 ], [ 25, 6 ], [ 11, 7 ], [ 17, 7 ], [ 25, 7 ], [ 12, 8 ], [ 16, 8 ], [ 13, 9 ], [ 14, 9 ], [ 45, 39 ], [ 46, 39 ], [ 45, 40 ], [ 46, 40 ], [ 50, 40 ], [ 49, 41 ], [ 51, 41 ], [ 50, 42 ], [ 52, 42 ], [ 52, 43 ], [ 52, 44 ], [ 53, 44 ] ]
 	}
 ]
