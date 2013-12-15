@@ -1,7 +1,7 @@
 [
 	{
 		"title": "Tutorial #1: Watch and Learn",
-		"description": "Welcome to Strategic Game of Life! This is the first tutorial level. The entire Game of Life is governed by the following four rules: <ol><li>Any live cell with fewer than two live neighbours dies.</li><li>Any live cell with two or three live neighbours lives.</li><li>Any live cell with more than three live neighbours dies.</li><li>Any dead cell with exactly three live neighbours becomes a live cell.</li></ol>If you're interested in learning more, read about the <a href=\"https://en.wikipedia.org/wiki/Conway's_Game_of_Life\" target=\"_blank\">Game of Life on WikiPedia</a>.<br /><br />Do you see that shape in the middle of the screen? It's called a Glider. Click play and watch what happens.",
+		"description": "Welcome to Strategic Game of Life! This is the first tutorial level. The entire Game of Life is governed by the following four rules: <ol><li>Any live cell with fewer than two live neighbours dies.</li><li>Any live cell with two or three live neighbours lives.</li><li>Any live cell with more than three live neighbours dies.</li><li>Any dead cell with exactly three live neighbours becomes a live cell.</li></ol>If you're interested in learning more, read about the <a href=\"https://en.wikipedia.org/wiki/Conway's_Game_of_Life\" target=\"_blank\">Game of Life on WikiPedia</a>.<br /><br />Do you see that shape in the middle of the screen? It's called a <strong>Glider</strong>. Click play and watch what happens.",
 		"introduce": [0],
 		"goal": { "x": 60, "y": 60 },
 		"arena": [ [30,30], [31,30], [32,30], [32,29], [31,28] ]
@@ -9,14 +9,14 @@
 
 	{
 		"title": "Tutorial #2: Now you Try",
-		"description": "Now that you kinda have a feel for how the game works, and you've seen a simulation in action, try to recreate that same shape you saw in the previous level. For your convenience, the shape has been added to your library.<br /><br />Every pattern you discover in the Game of Life can always be rotated 90&deg; or even flipped horizontally or vertically and will still work the same (although, if the patterns move, they will move in a different direction).",
+		"description": "Now that you kinda have a feel for how the game works, and you've seen a simulation in action, try to recreate that same <strong>Glider</strong> pattern you saw in the previous level. For your convenience, its pattern has been added to your library.<br /><br />Every pattern you discover in the Game of Life can always be rotated 90&deg; or even flipped horizontally or vertically and will still work the same (although, if the patterns move, they will move in a different direction).",
 		"goal": { "x": 60, "y": 60 },
 		"playables": [{ "x": 24, "y": 24, "width": 16, "height": 16 }]
 	},
 
 	{
 		"title": "Tutorial #3: Build more Gliders!",
-		"description": "This time, there's something in the way of your goal! This simple shape is called a Blinker, and will flip between being horizontal and vertical. Since there are two \"frames\" of this animation, it can be thought of as a <strong>Period 2 Oscillator</strong>.<br /><br />If you draw a Glider in the lower right corner of the playfield, then draw another one to the upper left of it, the first should destroy the barrier, and the second can activate the goal.",
+		"description": "This time, there's something in the way of your goal! This simple shape is called a <strong>Blinker</strong>, and will flip between being horizontal and vertical. Since there are two \"frames\" of this animation, it can be thought of as a <strong>Period 2 Oscillator</strong>.<br /><br />If you draw a <strong>Glider</strong> in the lower right corner of the playfield, then draw another one to the upper left of it, the first should destroy the barrier, and the second can activate the goal.",
 		"introduce": [1],
 		"goal": { "x": 60, "y": 60 },
 		"playables": [{ "x": 24, "y": 24, "width": 16, "height": 16 }],
@@ -25,7 +25,7 @@
 
 	{
 		"title": "Tutorial #4: Intro to Spaceship",
-		"description": "Gliders are pretty fun (and simple), however by playing a few more cells on the playfield, one can produce a Spaceship! They're like Gliders in the sense that they move, exept they move horizontally and vertically instead of diagnolly.<br /><br />You'll notice something a bit different happens after this level is done. Once the Spaceship crashes into the Blinkers, a chain reaction happens and the goal is activated. This chain reaction is how you will end up solving many of the levels in this game.<br /><br />You'll also notice some debris left on the field which don't move. We call these Still-Lifes, and they are a common phenomenon of the Game of Life.",
+		"description": "<strong>Gliders</strong> are pretty fun (and simple), however by playing a few more cells on the playfield, one can produce a <strong>Lightweight Spaceship</strong>! They're like <strong>Gliders</strong> in the sense that they move, exept they move horizontally and vertically instead of diagnolly.<br /><br />You'll notice something a bit different happens after this level is done. Once the <strong>Spaceship</strong> crashes into the <strong>Blinkers</strong>, a chain reaction happens and the goal is activated. This chain reaction is how you will end up solving many of the levels in this game.<br /><br />You'll also notice some debris left on the field which don't move. We call these <strong>Still Lifes</strong>, and they are a common phenomenon of the Game of Life.",
 		"introduce": [2,3],
 		"goal": { "x": 60, "y": 32 },
 		"playables": [{ "x": 1, "y": 26, "width": 7, "height": 6 }],
@@ -34,7 +34,7 @@
 
 	{
 		"title": "Tutorial #5: What is a Glider Gun",
-		"description": "This is another non-interactive level. Just click play and watch what happens. The Game of Life can allow for some complex interactions, and as you're about to see, the results can be quite interesting!",
+		"description": "This is another non-interactive level. Just click play and watch what happens!<br /><br />The Game of Life can allow for some complex interactions, and as you're about to see, the results can be quite interesting.<br /><br />The object in the upper left corner of the arena is called a <strong>Gosper Glider Gun</strong> and as you can tell it is aptly named.",
 		"introduce": [4],
 		"goal": { "x": 60, "y": 46 },
 		"playables": [{ "x": 24, "y": 24, "width": 0, "height": 0 }],
@@ -43,7 +43,7 @@
 
 	{
 		"title": "Tutorial #6: Multum in Parvo",
-		"description": "This is another non-interactive level. Notice how simple the pattern in the middle of the arena is, and yet how unpredictabley complex it can become.",
+		"description": "This is another non-interactive level. Notice how simple the <strong>Multum in Parvo</strong> pattern in the middle of the arena is, and yet how unpredictabley complex it can become.",
 		"introduce": [5],
 		"goal": { "x": 32, "y": 2 },
 		"arena": [[32,29],[33,29],[34,29],[31,30],[34,30],[30,31],[29,32]]
@@ -67,7 +67,7 @@
 
 	{
 		"title": "Hookshot",
-		"description": "Notice the green zones. These are Dead Zones. No cells will become alive in these zones, so you'll have to find a way to get around them. As a hint, see what happens when that Spaceship crashes into a wall... And remember, everything in the library can be rotated and flipped.",
+		"description": "Notice the green zones. These are <strong>Dead Zones</strong>. No cells will become alive in these zones, so you'll have to find a way to get around them. As a hint, see what happens when that <strong>Spaceship</strong> crashes into a wall... And remember, everything in the library can be rotated and flipped.",
 		"goal": { "x": 3, "y": 20 },
 		"playables": [ { "x": 0, "y": 48, "width": 32, "height": 16 }, { "x": 56, "y": 26, "width": 8, "height": 8 } ],
 		"deadzones": [ { "x": 0, "y": 22, "width": 16, "height": 4 }, { "x": 48, "y": 22, "width": 16, "height": 4 } ],
@@ -76,7 +76,7 @@
 
 	{
 		"title": "Flock of Gliders",
-		"description": "This one is pretty easy. It's a lot like the last one.",
+		"description": "This level can be beaten using the same method you beat the last leve.",
 		"goal": { "x": 59, "y": 4 },
 		"deadzones": [{"x":51,"y":2,"width":2,"height":5}],
 		"playables": [{"x":0,"y":0,"width":32,"height":16}],
@@ -85,7 +85,7 @@
 
 	{
 		"title": "Pentadecathlon",
-		"description": "Lots of stuff going on here. Just remember that you can often just throw a glider into the chaos and things work themselves out.",
+		"description": "Lots of stuff going on here. Those two big connected shapes are called <strong>Pentadecathlon</strong>, and they go through a chain reaction before stabilizing into an animation.<br /><br />There are also some <strong>Blinkers</strong> and <strong>Still Lifes</strong> thrown into the mix for fun, as well as an annoying <strong>Dead Zone</strong> getting in your way.<br /><br />Remember that you can often just throw a <strong>Glider</strong> into the chaos and things work themselves out.",
 		"introduce": [6],
 		"goal": { "x": 34, "y": 7 },
 		"deadzones": [ { "x": 32, "y": 0, "width": 1, "height": 10 }, { "x": 33, "y": 9, "width": 2, "height": 1 } ],
@@ -95,7 +95,7 @@
 
 	{
 		"title": "Abaddon: Destroyer of Worlds",
-		"description": "Remember that Glider Gun you saw a while ago? Well, it's back! Unfortunately, there's an Eater preventing any gliders from hitting the goal. An Eater, when placed just right, will destroy a Glider and retain its shape.",
+		"description": "Remember that <strong>Glider Gun</strong> you saw a while ago? Well, it's back! Unfortunately, there's an <strong>Eater</strong> preventing any gliders from hitting the goal.<br /><br />An <strong>Eater</strong>, when placed just right, will destroy a <strong>Glider</strong> and retain its shape.<br /><br />For them to work, a <strong>Glider</strong> needs to hit it at just the right angle. If the <strong>Eater</strong> oscillates, it needs to hit at the right frame of animation as well. Otherwise, if these strict conditions aren't met, it will be damaged or destroyed entirely.",
 		"introduce": [7],
 		"goal": { "x": 60, "y": 46 },
 		"deadzones": [],
@@ -105,7 +105,7 @@
 
 	{
 		"title": "Hey there Sparky!",
-		"description": "Whoa! Look at that bigass shape moving towards the goal! Unfortunately, it won't set off the goal. However, it will get in your way. Try to activate the goal even though that big thing is in your way!",
+		"description": "Whoa! Look at that giant slow-moving ship moving towards the goal! We call this thing <strong>Sparky</strong>.<br /><br />Unfortunately, it won't set off the goal, and will even serve to get in your way.<br /><br />Try to activate the goal even though that big thing is in your way!",
 		"introduce": [8],
 		"goal": { "x": 1, "y": 27 },
 		"deadzones": [ { "x": 0, "y": 55, "width": 64, "height": 9 } ],
@@ -115,7 +115,7 @@
 
 	{
 		"title": "God Complex",
-		"description": "This simple construct is called Gliders by the Dozen. Good luck getting to the Goal in the midst of that chaos!",
+		"description": "This simple construct is called <strong>Gliders by the Dozen</strong>. If you watch the pretty symmetical animation it plays, you'll soon find out where it gets its name from.<br /><br />Good luck activating the goal amidst all of the chaos!",
 		"introduce": [9],
 		"goal": { "x": 32, "y": 30 },
 		"deadzones": [],
@@ -125,7 +125,7 @@
 
 	{
 		"title": "Complex God",
-		"description": "Sure, you just beat this level a moment ago. But, can you beat it with these new Dead Zones in your way?",
+		"description": "Sure, you just beat this level a moment ago, and if I had to guess, you probably sent some <strong>Gliders</strong> towards it at a 45&deg; angle.<br /><br />Can you beat the same level with these new <strong>Dead Zones</strong> in your way?",
 		"introduce": [9],
 		"goal": { "x": 32, "y": 30 },
 		"deadzones": [ { "x": 8, "y": 8, "width": 2, "height": 2 }, { "x": 8, "y": 54, "width": 2, "height": 2 }, { "x": 54, "y": 8, "width": 2, "height": 2 }, { "x": 54, "y": 54, "width": 2, "height": 2 } ],
@@ -135,7 +135,7 @@
 
 	{
 		"title": "Orion's Belt",
-		"description": "This crazy three pronged spaceship is called an Orion 2, and is moving towards the upper left corner of the arena, which is where your spawn is! Can you get past it and activate the goal?",
+		"description": "This crazy three pronged spaceship is called an <strong>Orion 2</strong>, and is moving towards the upper left corner of the arena, which is where your playable zone is!<br /><br />Can you get past the ship and activate the goal?",
 		"introduce": [10],
 		"goal": { "x": 59, "y": 59 },
 		"deadzones": [ { "x": 4, "y": 48, "width": 12, "height": 12 }, { "x": 48, "y": 4, "width": 12, "height": 12 } ],
@@ -145,7 +145,7 @@
 
 	{
 		"title": "Many Hats",
-		"description": "You know the drill. Simple pattern to start with, crazy pattern to end with. Get to the goal!",
+		"description": "Here is another level with a simple pattern in the middle, which goes through a bunch of chaos before stabilizing into some <strong>Oscillators</strong> and <strong>Still Lifes</strong>.<br /><br />And, would you look at that? There's a <strong>Dead Zone</strong> right outside of the playable area!<br /><br />Try to activate the goal even with these hassles in the way!",
 		"goal": { "x": 28, "y": 39 },
 		"deadzones": [ { "x": 22, "y": 12, "width": 13, "height": 1 } ],
 		"playables": [ { "x": 22, "y": 0, "width": 13, "height": 12 } ],
@@ -154,7 +154,7 @@
 
 	{
 		"title": "Getting Difficult",
-		"description": "This one looks pretty difficult. You can't simply send a spaceship up and crash it into the wall and spawn a glider, as the horizontal gap is too small. As a hint, I was able to beat this on Generation 432 with 20 Pieces Played.",
+		"description": "This one looks pretty difficult. You can't simply send a <strong>Spaceship</strong> up and crash it into the wall and spawn a <strong>Glider</strong>, as the horizontal gap is too small.<br /><br />As a hint, I was able to beat this on Generation 432 with 20 Pieces Played.",
 		"goal": { "x": 32, "y": 4 },
 		"playables": [{"x":0,"y":48,"width":64,"height":16}],
 		"deadzones": [{"x":0,"y":34,"width":20,"height":4},{"x":44,"y":34,"width":20,"height":4},{"x":24,"y":16,"width":16,"height":4}]
