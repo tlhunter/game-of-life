@@ -476,6 +476,13 @@ function godExport() {
 	}, null, "  "));
 }
 
+// Load all levels. Useful for populating library items.
+function godLoadAllLevels() {
+	for (var i in levels) {
+		loadLevel(i);
+	};
+}
+
 function log(msg) {
 	$('#console').text(msg);
 }
