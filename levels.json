@@ -133,7 +133,7 @@
 
 	{
 		"title": "Complex God",
-		"description": "This simple construct is called Gliders by the Dozen. Good luck getting to the Goal in the midst of that chaos!",
+		"description": "Sure, you just beat this level a moment ago. But, can you beat it with these new Dead Zones in your way?",
 		"introduce": [9],
 		"goal": { "x": 32, "y": 30 },
 		"deadzones": [ { "x": 8, "y": 8, "width": 2, "height": 2 }, { "x": 8, "y": 54, "width": 2, "height": 2 }, { "x": 54, "y": 8, "width": 2, "height": 2 }, { "x": 54, "y": 54, "width": 2, "height": 2 } ],
