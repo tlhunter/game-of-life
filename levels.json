@@ -167,5 +167,15 @@
 		"goal": { "x": 32, "y": 4 },
 		"playables": [{"x":0,"y":48,"width":64,"height":16}],
 		"deadzones": [{"x":0,"y":34,"width":20,"height":4},{"x":44,"y":34,"width":20,"height":4},{"x":24,"y":16,"width":16,"height":4}]
+	},
+
+	{
+		"title": "Round the Bend",
+		"description": "Other than a few <strong>Still Lifes</strong> protecting the goal, this isn't too interesting of a level. Unless, you consider, that there is no line of sight between you and the goal, and you may need to play off of two separate walls to reach the goal.<br /><br />Note: I have not beaten this level yet. If you can beat it, tweet a screenshot of your initial setup to @tlhunter.",
+		"goal": { "x": 48, "y": 56 },
+		"deadzones": [ { "x": 31, "y": 31, "width": 4, "height": 33 } ],
+		"playables": [ { "x": 0, "y": 48, "width": 31, "height": 16 } ],
+		"arena": [ [ 45, 53 ], [ 46, 53 ], [ 50, 53 ], [ 51, 53 ], [ 45, 54 ], [ 46, 54 ], [ 50, 54 ], [ 51, 54 ], [ 45, 58 ], [ 46, 58 ], [ 50, 58 ], [ 51, 58 ], [ 45, 59 ], [ 46, 59 ], [ 50, 59 ], [ 51, 59 ] ]
 	}
+
 ]

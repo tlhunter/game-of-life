@@ -217,6 +217,7 @@ function prevLevel() {
 	alert("not yet implemented!");
 }
 
+// This is executed once a level has been won
 function winLevel() {
 	$('#gamefield-wrapper').addClass('won');
 	//clearTimeout(redraw); 
@@ -232,6 +233,7 @@ function winLevel() {
 	}
 }
 
+// Loads the specified level, updating the DOM, and a ton of other things. Use `loadLevel(X)` to cheat and load a level.
 function loadLevel(level_id) {
 	var level = levels[level_id];
 	generation = 0;
@@ -330,6 +332,7 @@ function clear() {
 	drawArena();
 }
 
+// Creates (and returns) a new arena 64x64 array of false's
 function buildArena() {
 	var new_arena = [];
 
@@ -343,6 +346,7 @@ function buildArena() {
 	return new_arena;
 }
 
+// Draws the entire current level
 function drawArena() {
 	for (var y = 0; y < CELLS_Y; y++) {
 		for (var x = 0; x < CELLS_X; x++) {
@@ -419,6 +423,7 @@ function animate() {
 	drawArena();
 }
 
+// Examines a specific cell and figures out if it should be alive or dead
 function updateCellState(x, y, new_arena) {
 	var cell_state = arena[y][x];
 	var living_neighbors = 0;
@@ -502,6 +507,7 @@ function godLoadAllLevels() {
 	};
 }
 
+// Log a message to the on-screen console
 function log(msg) {
 	$('#console').text(msg);
 }
