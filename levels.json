@@ -459,7 +459,7 @@
 
 	{
 	  "title": "Abaddon: Destroyer of Worlds",
-	  "description": "DESC",
+	  "description": "Remember that Glider Gun you saw a while ago? Well, it's back! Unfortunately, there's an Eater preventing any gliders from hitting the goal. An Eater, when placed just right, will destroy a Glider and retain its shape.",
 	  "introduce": [7],
 	  "goal": {
 		"x": 60,
