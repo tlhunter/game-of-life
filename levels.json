@@ -1,7 +1,7 @@
 [
 	{
 		"title": "Tutorial #1: Watch and Learn",
-		"description": "Welcome to Strategic Game of Life! This is the first tutorial level. Do you see that shape in the middle of the screen? It's called a Glider. Click play and watch what happens.",
+		"description": "Welcome to Strategic Game of Life! This is the first tutorial level. The entire Game of Life is governed by the following four rules: <ol><li>Any live cell with fewer than two live neighbours dies.</li><li>Any live cell with two or three live neighbours lives.</li><li>Any live cell with more than three live neighbours dies.</li><li>Any dead cell with exactly three live neighbours becomes a live cell.</li></ol>Do you see that shape in the middle of the screen? It's called a Glider. Click play and watch what happens.",
 		"introduce": [0],
 		"goal": { "x": 60, "y": 60 },
 		"arena": [ [30,30], [31,30], [32,30], [32,29], [31,28] ]
