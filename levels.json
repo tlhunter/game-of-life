@@ -129,5 +129,15 @@
 		"deadzones": [],
 		"playables": [ { "x": 0, "y": 0, "width": 8, "height": 8 }, { "x": 0, "y": 56, "width": 8, "height": 8 }, { "x": 56, "y": 0, "width": 8, "height": 8 }, { "x": 56, "y": 56, "width": 8, "height": 8 } ],
 		"arena": [ [ 30, 29 ], [ 31, 29 ], [ 34, 29 ], [ 30, 30 ], [ 34, 30 ], [ 30, 31 ], [ 33, 31 ], [ 34, 31 ] ]
+	},
+
+	{
+		"title": "Complex God",
+		"description": "This simple construct is called Gliders by the Dozen. Good luck getting to the Goal in the midst of that chaos!",
+		"introduce": [9],
+		"goal": { "x": 32, "y": 30 },
+		"deadzones": [ { "x": 8, "y": 8, "width": 2, "height": 2 }, { "x": 8, "y": 54, "width": 2, "height": 2 }, { "x": 54, "y": 8, "width": 2, "height": 2 }, { "x": 54, "y": 54, "width": 2, "height": 2 } ],
+		"playables": [ { "x": 0, "y": 0, "width": 8, "height": 8 }, { "x": 0, "y": 56, "width": 8, "height": 8 }, { "x": 56, "y": 0, "width": 8, "height": 8 }, { "x": 56, "y": 56, "width": 8, "height": 8 } ],
+		"arena": [ [ 30, 29 ], [ 31, 29 ], [ 34, 29 ], [ 30, 30 ], [ 34, 30 ], [ 30, 31 ], [ 33, 31 ], [ 34, 31 ] ]
 	}
 ]
