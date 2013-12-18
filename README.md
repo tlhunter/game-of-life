@@ -36,8 +36,6 @@ Here are some provided hidden functions:
 playablezone.
 * `goal = { x: 0, y: 0 };` - This moves the goal.
 * `loadLevel(10);` - This loads a specific level.
-* `godLoadAllLevels();` - This loads each level in order, to build the list of
-introduced library items.
 * `deadzones = [{x:0,y:0,width:20,height:20}];` - This sets all Dead Zones.
 * `playables = [{x:0,y:0,width:20,height:20}];` - This sets all Playable Zones.
 * `godExport();` - This command will export all the level data you need in order
@@ -101,7 +99,7 @@ beaten the level.
 		"title": "Cool Level",
 		"description": "Longer <strong>Description</strong>.",
 		"goal": { "x": 48, "y": 56 },
-		"introduce": [10],
+		"library": 10,
 		"deadzones": [ { "x": 31, "y": 31, "width": 4, "height": 33 } ],
 		"playables": [ { "x": 0, "y": 48, "width": 31, "height": 16 } ],
 		"arena": [ [ 45, 53 ], [ 46, 53 ], [ 50, 53 ] ]
@@ -118,11 +116,10 @@ escaped beforehand.
 This is an object containing an `x` and `y` attribute, and represents the
 coordinate of the goal.
 
-### `introduce` [optional]
+### `library` [optional]
 
-This attribute is an array of integers, where each integer represents an
-item in the library being introduced by this level. These library items
-are currently stored in the DOM beforehand.
+This attribute is an integer which represents the furthest item the user has
+learned about by this point in the game.
 
 ### `deadzones` [optional]
 

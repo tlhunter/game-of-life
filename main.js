@@ -311,9 +311,10 @@ function loadLevel(level_id) {
 		deadzones = [];
 	}
 
-	if (typeof level.introduce != "undefined") {
-		for (i in level.introduce) {
-			$('#library-' + level.introduce[i]).show();
+	$('#library .item').hide();
+	if (typeof level.library != "undefined") {
+		for (var i = 0; i <= level.library; i++) {
+			$('.item#library-' + i).show();
 		}
 	}
 
@@ -546,13 +547,6 @@ function godExport() {
 		playables: playables,
 		arena: pointsInExportFormat
 	}, null, "  "));
-}
-
-// Load all levels. Useful for populating library items.
-function godLoadAllLevels() {
-	for (var i in levels) {
-		loadLevel(i);
-	};
 }
 
 // Log a message to the on-screen console
