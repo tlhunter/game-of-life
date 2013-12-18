@@ -18,7 +18,7 @@ var redraw = null;
 var playing = false;
 var generations_until_beaten = 0;
 var drawstate = null;
-var lastKnownHoverPos = {x:null,y:null};
+var lastKnownHoverPos = {x:-1,y:-1};
 
 var $play = null;
 var $stop = null;
@@ -57,7 +57,7 @@ if (typeof localStorage.level != 'undefined') {
 	current_level = parseInt(localStorage.level, 10);
 	if (isNaN(current_level)) {
 		current_level = 0;
-		localStorage.level = 0;
+	localStorage.level = 0;
 	}
 } else {
 	localStorage.level = 0;
@@ -191,6 +191,12 @@ function init() {
 	});
 	$gamefield.on('mouseup', function () {
 		drawstate = null;
+	});
+	$gamefield.on('mouseleave', function() {
+		lastKnownHoverPos = {
+			x: -1,
+			y: -1
+		};
 	});
 }
 
