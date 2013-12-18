@@ -120,9 +120,6 @@ body {
 /*#console, #toolbar {*/
 	/*margin-left: 310px;*/
 /*}*/
-#button-level-prev {
-	display: none;
-}
 h1, h2 {
 	text-align: center;
 	font-size: 21px;

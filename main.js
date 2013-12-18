@@ -52,7 +52,16 @@ var colors = {
 };
 
 var current_level = 0; // zero based level system
-var level_earned = 0;
+
+if (typeof localStorage.level != 'undefined') {
+	current_level = parseInt(localStorage.level, 10);
+	if (isNaN(current_level)) {
+		current_level = 0;
+		localStorage.level = 0;
+	}
+} else {
+	localStorage.level = 0;
+}
 
 var playables = [];
 var deadzones = [];
@@ -143,15 +152,20 @@ function init() {
 			} else {
 				play();
 			}
-		} else if (event.charCode === 99 || event.charCode === 67) { // User pressed 'c'
+		} else if (event.charCode === 99 || event.charCode === 67) { // User pressed 'C'
 			event.preventDefault();
 			if (!playing) {
 				$clear.click();
 			}
-		} else if (event.charCode === 110 || event.charCode === 78) { // User pressed 'n'
+		} else if (event.charCode === 110 || event.charCode === 78) { // User pressed 'N'
 			event.preventDefault();
-			if (generations_until_beaten) {
+			if (!$next.prop('disabled')) {
 				$next.click();
+			}
+		} else if (event.charCode === 112 || event.charCode === 80) { // User pressed 'P'
+			event.preventDefault();
+			if (!$prev.prop('disabled')) {
+				$prev.click();
 			}
 		}
 	});
@@ -247,15 +261,14 @@ function nextLevel() {
 	$('#gamefield-wrapper').removeClass('playing');
 	stop();
 
-	$next.attr('disabled', true);
-	//$prev.attr('disabled', false);
-
-	current_level++;
-	loadLevel(current_level);
+	loadLevel(current_level + 1);
 }
 
 function prevLevel() {
-	alert("not yet implemented!");
+	$('#gamefield-wrapper').removeClass('playing');
+	stop();
+
+	loadLevel(current_level - 1);
 }
 
 // This is executed once a level has been won
@@ -270,16 +283,28 @@ function winLevel() {
 	generations_until_beaten = generation;
 
 	if (current_level == levels.length - 1) {
-		alert("You've won the game!");
-	} else if (current_level == level_earned) {
+		alert("NOONE SHOULD BE HERE --LEVELORD");
+	} else if (current_level == localStorage.level) {
 		$next.attr('disabled', false);
-		level_earned++;
-		console.log("beat most recent level. unlocking next level: " + level_earned);
+		localStorage.level = current_level + 1;
+		console.log("beat most recent level. unlocking next level: " + localStorage.level);
 	}
 }
 
 // Loads the specified level, updating the DOM, and a ton of other things. Use `loadLevel(X)` to cheat and load a level.
 function loadLevel(level_id) {
+	if (level_id == 0) {
+		$prev.attr('disabled', true);
+	} else {
+		$prev.attr('disabled', false);
+	}
+
+	if (level_id == levels.length - 1 || level_id >= parseInt(localStorage.level, 10)) {
+		$next.attr('disabled', true);
+	} else {
+		$next.attr('disabled', false);
+	}
+
 	var level = levels[level_id];
 	generation = 0;
 	generations_until_beaten = 0;
