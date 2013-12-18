@@ -230,7 +230,7 @@ function setTile(tile, state) {
 		}
 	}
 
-	log("Position [" + tile.x + ", " + tile.y + "] is outside of the playable (pink) zone.");
+	log("Position [" + tile.x + ", " + tile.y + "] is outside of a playable (green) zone.");
 }
 
 function play() {
