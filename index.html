@@ -34,6 +34,7 @@
 					</div>
 				</div>
 				<div id="gamefield-wrapper">
+					<canvas id="starfield" width="512" height="512"></canvas>
 					<canvas id="gamefield" width="512" height="512"></canvas>
 				</div>
 				<div id="console">Page Loading...</div>
@@ -43,8 +44,8 @@
 				<div id="level-info">[<span id="level-counter"></span>]: <strong id="title">Page Loading...</strong></div>
 				<div class="text">Page Loading...</div>
 				<div class="footer">
-					You can toggle the cells in the <span style="color: #ffd9b2;">orange</span> region.<br />
-					Your goal is to activate the <span style="color: rgb(0,127,255);">blue</span> cell.<br />
+					You can toggle cells in <span style="color: #00ff00;">green</span> regions.<br />
+					Your goal is to activate the rainbow cell.<br />
 					Created by <a href="http://twitter.com/tlhunter" target="_blank">@tlhunter</a>. Fork on <a href="https://github.com/tlhunter/game-of-life" target="_blank">GitHub</a>.<br />
 					<br /><strong>SPACE</strong>: Toggle Play/Stop<br /><strong>N</strong>: Load Next Level<br /><strong>C</strong>: Clear Playable Area
 				</div>
@@ -52,6 +53,7 @@
 		</div>
 	</body>
 	<script src="jquery-1.10.2.min.js"></script>
+	<script src="animation.js"></script>
 	<script src="main.js"></script>
 	<script type="text/javascript">
 		var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-30905176-1']); _gaq.push(['_trackPageview']);

@@ -3,8 +3,10 @@ body {
 	user-select: none;
 	-webkit-user-select: none;
 	cursor: default; /* might as well hide text selection cursor since you can't select it now */
-	font-family: Georgia;
+	font-family: sans-serif;
 	font-size: 15px;
+	color: #fff;
+	background-color: #000;
 }
 /*#library, #statistics, #console, #description {
 	user-select: initial;
@@ -19,6 +21,13 @@ body {
 	cursor: crosshair;
 	cursor: none;
 }
+#gamefield,
+#starfield {
+	position: absolute;
+	top: 4px;
+	left: 4px;
+}
+
 #main-wrapper {
 	width: 1140px;
 	margin: 0 auto;
@@ -39,39 +48,48 @@ body {
 	font-size: 13px;
 	font-family: sans-serif;
 }
+#library a {
+	color: white;
+}
 #description {
 	width: 300px;
 	float: left;
 	position: relative;
 	font-size: 14px;
 }
+#description a {
+	color: #0033cc;
+}
 #description, #library {
 	height: 556px;
 }
 #description .text {
 	padding-top: 10px;
-	font-style: italic;
+	/*font-style: italic;*/
 }
 #description .footer {
 	position: absolute;
 	bottom: 0px;
-	background-color: #ffc;
+	background-color: #111;
 	padding: 4px 7px;
 	border-radius: 6;
-	font-size: 13px;
+	font-size: 12px;
 	width: 100%;
 }
 #gamefield-wrapper {
+	background-color: #222;
+	width: 520px;
+	height: 520px;
+	position: relative;
+	border-radius: 3px;
+}
+#gamefield-wrapper.playing {
 	background-color: orange;
-	padding: 4px;
 }
 #gamefield-wrapper.won {
 	background-color: lime;
 }
 #toolbar {
-	background-color: black;
-	width: 512px;
-	padding: 4px;
 	border-top-left-radius: 4px;
 	border-top-right-radius: 4px;
 	height: 28px;
@@ -88,14 +106,16 @@ body {
 }
 #console {
 	clear: both;
-	background-color: #000;
-	color: #fff;
-	padding: 4px;
 	font-family: consolas, "courier new";
 	font-size: 13px;
-	width: 512px;
 	border-bottom-left-radius: 4px;
 	border-bottom-right-radius: 4px;
+}
+#toolbar, #console {
+	width: 512px;
+	background-color: #111;
+	color: #fff;
+	padding: 4px;
 }
 /*#console, #toolbar {*/
 	/*margin-left: 310px;*/

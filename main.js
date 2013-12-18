@@ -8,10 +8,12 @@ var CELLS_X = GAMEFIELD_WIDTH / TILE_WIDTH;
 var CELLS_Y = GAMEFIELD_HEIGHT / TILE_HEIGHT;
 
 var generation = 0;
+var goalPhase = 0;
 var $generation = null;
 var arena = buildArena();
 var arena_init = null;
 var context = null;
+var starfieldContext = null;
 var redraw = null;
 var playing = false;
 var generations_until_beaten = 0;
@@ -30,14 +32,24 @@ var $gamefield = null;
 var $piece_count = null;
 
 var colors = {
-	goal:		"rgb(0,127,255)",
-	playable:	"rgba(255,127,0, 0.3)",
-	deadzone:	"rgba(127,127,0,0.3)",
-	dead:		"rgb(255,255,255)",
-	alive:		"rgb(0,0,0)",
-	grid:		"rgba(0,0,0,0.1)",
-	hover:		"rgba(63,0,127,0.5)",
-}
+	abyss:		'rgba(0,0,0,0.3)',
+	playable:	'rgba(0,255,0,0.2)',
+	deadzone:	'rgba(255,0,0,0.2)',
+	alive:		'rgb(175,175,175)',
+	grid:		'rgba(255,255,255,0.035)',
+	hover:		'rgba(127,63,255,0.5)',
+	stars:		[
+				'#ffffff',
+				'#ffffff',
+				'#ffffff',
+				'#f0f0f0',
+				'#f0f0f0',
+				'#cccccc',
+				'#e9f29d',
+				'#9dc7f2',
+				'#f9584c',
+	]
+};
 
 var current_level = 0; // zero based level system
 var level_earned = 0;
@@ -48,12 +60,42 @@ var deadzones = [];
 var goal = {};
 var levels = [];
 
+var stars = [];
+
+var render = function() {
+	starfieldContext.fillStyle = colors.abyss; // the slight transparency leaves a trail
+	starfieldContext.fillRect(0, 0, GAMEFIELD_WIDTH, GAMEFIELD_HEIGHT);
+
+	if (Math.random() < 0.7) {
+		stars.push({
+			x: Math.floor(Math.random() * GAMEFIELD_WIDTH),
+			y: 0,
+			speed: Math.random() * 5 + 2,
+			color: colors.stars[Math.floor(Math.random() * colors.stars.length)]
+		});
+	}
+
+	var star = null;
+	for (var index in stars) {
+		star = stars[index];
+		starfieldContext.fillStyle = star.color;
+		starfieldContext.fillRect(star.x, star.y, 1, 1);
+		star.y += star.speed;
+		if (star.y >= GAMEFIELD_HEIGHT) {
+			stars.splice(index, 1);
+		}
+	}
+
+	drawArena();
+}
+
 $(function() {
 	$.getJSON('./levels.json', function(data) {
 		levels = data;
 		setupdom();
 		loadLevel(current_level);
 		init();
+		animloop();
 	});
 });
 
@@ -75,6 +117,9 @@ function setupdom() {
 
 	var gamefield = document.getElementById('gamefield');
 	context = gamefield.getContext('2d');
+
+	var starfield = document.getElementById('starfield');
+	starfieldContext = starfield.getContext('2d');
 }
 
 function init() {
@@ -82,7 +127,7 @@ function init() {
 
 	countPlayedPieces();
 
-	drawArena(); // First Draw
+	//drawArena(); // First Draw
 
 	$play.on('click', play);
 	$stop.on('click', stop);
@@ -117,24 +162,17 @@ function init() {
 		setTile(tile, drawstate)
 	});
 	$gamefield.on('mousemove', function (event) {
+		var pos = eventPos(event);
+
+		lastKnownHoverPos = {
+			x: pos.x,
+			y: pos.y
+		};
+
 		if (drawstate === null) {
-			var pos = eventPos(event);
-
-			// Don't want to needlessly redraw the arena with every pixel move of the mouse, just the tile move of a mouse
-			if (pos.x == lastKnownHoverPos.x && pos.y == lastKnownHoverPos.y) {
-				return;
-			}
-
-			lastKnownHoverPos = {
-				x: pos.x,
-				y: pos.y
-			};
-
-			drawArena();
-			context.fillStyle = colors.hover;
-			context.fillRect(pos.x * TILE_WIDTH, pos.y * TILE_HEIGHT, 1 * TILE_WIDTH, 1 * TILE_HEIGHT);
 			return;
 		}
+
 		setTile(eventPos(event), drawstate);
 	});
 	$gamefield.on('mouseup', function () {
@@ -167,7 +205,7 @@ function setTile(tile, state) {
 			arena[tile.y][tile.x] = state;
 			log("Toggled [" + tile.x + ", " + tile.y + "].");
 			countPlayedPieces();
-			drawArena();
+			//drawArena();
 			return;
 		}
 	}
@@ -176,6 +214,7 @@ function setTile(tile, state) {
 }
 
 function play() {
+	$('#gamefield-wrapper').addClass('playing');
 	$stop.attr('disabled', false);
 	$clear.attr('disabled', true);
 	$play.attr('disabled', true);
@@ -183,11 +222,12 @@ function play() {
 
 	arena_init = arena.slice(0); // Backup the initial arena state
 
-	drawArena();
-	redraw = setInterval(animate, 100);
+	//drawArena();
+	redraw = setInterval(calculateGeneration, 90);
 }
 
 function stop() {
+	$('#gamefield-wrapper').removeClass('playing');
 	clearTimeout(redraw); 
 
 	$play.attr('disabled', false);
@@ -200,10 +240,11 @@ function stop() {
 	playing = false;
 
 	arena = arena_init.slice(0); // Restore the initial arena state
-	drawArena();
+	//drawArena();
 }
 
 function nextLevel() {
+	$('#gamefield-wrapper').removeClass('playing');
 	stop();
 
 	$next.attr('disabled', true);
@@ -219,6 +260,10 @@ function prevLevel() {
 
 // This is executed once a level has been won
 function winLevel() {
+	// Did we already win this level?
+	if (generations_until_beaten) {
+		return;
+	}
 	$('#gamefield-wrapper').addClass('won');
 	//clearTimeout(redraw); 
 	log("Game won in " + generation + " generations!");
@@ -275,7 +320,7 @@ function loadLevel(level_id) {
 	// Make this the initial state
 	arena_init = arena.slice(0);
 
-	drawArena();
+	//drawArena();
 	log("Loaded level #" + (level_id + 1));
 
 	if (!playables.length) {
@@ -315,7 +360,7 @@ function countPlayedPieces() {
 function clear() {
 	if (!playables.length) {
 		log("There are no playable areas to clear!");
-		drawArena(); // might as well...
+		//drawArena(); // might as well...
 		return;
 	}
 
@@ -329,7 +374,7 @@ function clear() {
 
 	log("The playing field has been cleared.");
 
-	drawArena();
+	//drawArena();
 }
 
 // Creates (and returns) a new arena 64x64 array of false's
@@ -348,23 +393,10 @@ function buildArena() {
 
 // Draws the entire current level
 function drawArena() {
-	for (var y = 0; y < CELLS_Y; y++) {
-		for (var x = 0; x < CELLS_X; x++) {
-			if (goal.x == x && goal.y == y) {
-				context.fillStyle = colors.goal;
-				if (arena[y][x] && !generations_until_beaten) {
-					winLevel();
-				}
-			} else if (arena[y][x]) {
-				context.fillStyle = colors.alive;
-			} else {
-				context.fillStyle = colors.dead;
-			}
-			context.fillRect(x * TILE_WIDTH, y * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
-		}
-	}
+	// MAKE EVERYTHING TRANSPARENT
+	context.clearRect(0, 0, GAMEFIELD_WIDTH, GAMEFIELD_HEIGHT);
 
-	// Draw playable zone (if applicable)
+	// DRAW PLAYABLE ZONES
 	context.fillStyle = colors.playable;
 	for (var i in playables) {
 		context.fillRect(
@@ -375,7 +407,7 @@ function drawArena() {
 		);
 	}
 
-	// Draw dead zones (if applicable)
+	// DRAW DEAD ZONES
 	context.fillStyle = colors.deadzone;
 	for (var i in deadzones) {
 		context.fillRect(
@@ -386,28 +418,40 @@ function drawArena() {
 		);
 	}
 
+	// DRAW LIVING CELLS
+	context.fillStyle = colors.alive;
+	for (var y = 0; y < CELLS_Y; y++) {
+		for (var x = 0; x < CELLS_X; x++) {
+			if (arena[y][x]) {
+				context.fillRect(x * TILE_WIDTH, y * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
+			}
+		}
+	}
+
+	// DRAW GOAL
+	context.fillStyle = 'hsla(' + Math.floor((Math.sin(goalPhase++/10)+1)/2*255) + ',50%,50%,0.75)'; // fade between 0.5 and 1 opacity
+	context.fillRect(goal.x * TILE_WIDTH, goal.y * TILE_HEIGHT, 1 * TILE_WIDTH, 1 * TILE_HEIGHT);
+	if (goalPhase >= 255) {
+		goalPhase = 0;
+	}
+
+	// DRAW HOVER
+	context.fillStyle = colors.hover;
+	context.fillRect(lastKnownHoverPos.x * TILE_WIDTH, lastKnownHoverPos.y * TILE_HEIGHT, 1 * TILE_WIDTH, 1 * TILE_HEIGHT);
+
+	// DRAW GRID
 	context.fillStyle = colors.grid;
 	for (var i = 0; i < CELLS_X; i++) {
-		context.fillRect(
-			i * TILE_WIDTH,
-			0,
-			1,
-			TILE_WIDTH * CELLS_X
-		);
+		context.fillRect( i * TILE_WIDTH, 0, 1, TILE_WIDTH * CELLS_X);
 	}
-		
+
 	for (var i = 0; i < CELLS_Y; i++) {
-		context.fillRect(
-			0,
-			i * TILE_HEIGHT,
-			TILE_HEIGHT * CELLS_Y,
-			1
-		);
+		context.fillRect( 0, i * TILE_HEIGHT, TILE_HEIGHT * CELLS_Y, 1);
 	}
 }
 
 // Draw each new generation
-function animate() {
+function calculateGeneration() {
 	generation++;
 	$generation.html(generation);
 
@@ -419,8 +463,12 @@ function animate() {
 		}
 	}
 
+	if (arena[goal.y][goal.x]) {
+		winLevel();
+	}
+
 	arena = new_arena;
-	drawArena();
+	//drawArena();
 }
 
 // Examines a specific cell and figures out if it should be alive or dead
@@ -511,3 +559,9 @@ function godLoadAllLevels() {
 function log(msg) {
 	$('#console').text(msg);
 }
+
+function animloop() {
+  requestAnimationFrame(animloop);
+  render();
+}
+

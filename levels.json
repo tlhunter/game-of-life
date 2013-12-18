@@ -1,7 +1,7 @@
 [
 	{
 		"title": "Tutorial #1: Watch and Learn",
-		"description": "Welcome to Strategic Game of Life! This is the first tutorial level. The entire Game of Life is governed by the following four rules: <ol><li>Any live cell with fewer than two live neighbours dies.</li><li>Any live cell with two or three live neighbours lives.</li><li>Any live cell with more than three live neighbours dies.</li><li>Any dead cell with exactly three live neighbours becomes a live cell.</li></ol>If you're interested in learning more, read about the <a href=\"https://en.wikipedia.org/wiki/Conway's_Game_of_Life\" target=\"_blank\">Game of Life on WikiPedia</a>.<br /><br />Do you see that shape in the middle of the screen? It's called a <strong>Glider</strong>. Click play and watch what happens.",
+		"description": "Welcome to Strategic Game of Life! This is the first tutorial level. The entire Game of Life is governed by the following four rules: <ol><li>Any live cell with fewer than two live neighbours dies.</li><li>Any live cell with two or three live neighbours lives.</li><li>Any live cell with more than three live neighbours dies.</li><li>Any dead cell with exactly three live neighbours becomes a live cell.</li></ol>If you're interested in learning more, read about the <a href=\"https://en.wikipedia.org/wiki/Conway's_Game_of_Life\" target=\"_blank\">Game of Life on WikiPedia</a>.<br /><br />Do you see that shape in the middle of the screen? It's called a <strong>Glider</strong>. And that rainbow tile is the <strong>Goal</strong>. Click play and watch what happens. Note that this level isn't interactive.",
 		"introduce": [0],
 		"goal": { "x": 60, "y": 60 },
 		"deadzones": [ { "x": 0, "y": 0, "width": 28, "height": 11 } ],
@@ -10,14 +10,14 @@
 
 	{
 		"title": "Tutorial #2: Now you Try",
-		"description": "Now that you kinda have a feel for how the game works, and you've seen a simulation in action, try to recreate that same <strong>Glider</strong> pattern you saw in the previous level. For your convenience, its pattern has been added to your library.<br /><br />Every pattern you discover in the Game of Life can always be rotated 90&deg; or even flipped horizontally or vertically and will still work the same (although, if the patterns move, they will move in a different direction).",
+		"description": "Now that you kinda have a feel for how the game works, and you've seen a simulation in action, try to recreate that same <strong>Glider</strong> pattern you saw in the previous level. For your convenience, its pattern has been added to your library.<br /><br />Every pattern you discover in the Game of Life can always be rotated 90&deg; or even flipped horizontally or vertically and will still work the same (although, if the patterns move, they will move in a different direction).<br /><br />You can only alter the state of cells within the green <strong>Playable Zone</strong>.",
 		"goal": { "x": 60, "y": 60 },
 		"playables": [{ "x": 24, "y": 24, "width": 16, "height": 16 }]
 	},
 
 	{
 		"title": "Tutorial #3: Build more Gliders!",
-		"description": "This time, there's something in the way of your goal! This simple shape is called a <strong>Blinker</strong>, and will flip between being horizontal and vertical. Since there are two \"frames\" of this animation, it can be thought of as a <strong>Period 2 Oscillator</strong>.<br /><br />If you draw a <strong>Glider</strong> in the lower right corner of the playfield, then draw another one to the upper left of it, the first should destroy the barrier, and the second can activate the goal.",
+		"description": "This time, there's something in the way of your <strong>Goal</strong>! This simple shape is called a <strong>Blinker</strong>, and will flip between being horizontal and vertical. Since there are two \"frames\" of this animation, it can be thought of as a <strong>Period 2 Oscillator</strong>.<br /><br />If you draw a <strong>Glider</strong> in the lower right corner of the playfield, then draw another one to the upper left of it, the first should destroy the barrier, and the second can activate the <strong>Goal</strong>.",
 		"introduce": [1],
 		"goal": { "x": 60, "y": 60 },
 		"playables": [{ "x": 24, "y": 24, "width": 16, "height": 16 }],
@@ -26,7 +26,7 @@
 
 	{
 		"title": "Tutorial #4: Intro to Spaceship",
-		"description": "<strong>Gliders</strong> are pretty fun (and simple), however by playing a few more cells on the playfield, one can produce a <strong>Lightweight Spaceship</strong>! They're like <strong>Gliders</strong> in the sense that they move, exept they move horizontally and vertically instead of diagnolly.<br /><br />You'll notice something a bit different happens after this level is done. Once the <strong>Spaceship</strong> crashes into the <strong>Blinkers</strong>, a chain reaction happens and the goal is activated. This chain reaction is how you will end up solving many of the levels in this game.<br /><br />You'll also notice some debris left on the field which don't move. We call these <strong>Still Lifes</strong>, and they are a common phenomenon of the Game of Life.",
+		"description": "<strong>Gliders</strong> are pretty fun (and simple), however by playing a few more cells on the playfield, one can produce a <strong>Lightweight Spaceship</strong>! They're like <strong>Gliders</strong> in the sense that they move, exept they move horizontally and vertically instead of diagnolly.<br /><br />You'll notice something a bit different happens after this level is done. Once the <strong>Spaceship</strong> crashes into the <strong>Blinkers</strong>, a chain reaction happens and the <strong>Goal</strong> is activated. This chain reaction is how you will end up solving many of the levels in this game.<br /><br />You'll also notice some debris left on the field which don't move. We call these <strong>Still Lifes</strong>, and they are a common phenomenon of the Game of Life.",
 		"introduce": [2,3],
 		"goal": { "x": 60, "y": 32 },
 		"playables": [{ "x": 1, "y": 26, "width": 7, "height": 6 }],
@@ -44,7 +44,7 @@
 
 	{
 		"title": "Tutorial #6: Multum in Parvo",
-		"description": "This is another non-interactive level. Notice how simple the <strong>Multum in Parvo</strong> pattern in the middle of the arena is, and yet how unpredictabley complex it can become.",
+		"description": "This is another non-interactive level.<br /><br />Notice how simple the <strong>Multum in Parvo</strong> pattern in the middle of the arena is, and yet how unpredictabley complex it can become.",
 		"introduce": [5],
 		"goal": { "x": 32, "y": 2 },
 		"arena": [[32,29],[33,29],[34,29],[31,30],[34,30],[30,31],[29,32]]
@@ -52,7 +52,7 @@
 
 	{
 		"title": "First Real Mission",
-		"description": "Alright, it's time for your first real mission! Try to tear your way through the barrier and get to the goal!",
+		"description": "Alright, it's time for your first real mission! Try to tear your way through the barrier and get to the <strong>Goal</strong>!",
 		"goal": { "x": 32, "y": 2 },
 		"playables": [{ "x": 24, "y": 48, "width": 16, "height": 16 }],
 		"arena": [ [32,6], [32,7], [32,8], [29,6], [29,7], [29,8], [35,6], [35,7], [35,8] ]
@@ -60,7 +60,7 @@
 
 	{
 		"title": "Second Real Mission",
-		"description": "This mission is a lot like the last one, except that the playable area has changed quite a bit. Can you dig it?",
+		"description": "This mission is a lot like the last one, except that the playable area has changed quite a bit.<br /><br />Remember that unpredictable things can happen when two objects collide.",
 		"goal": { "x": 32, "y": 2 },
 		"playables": [{ "x": 0, "y": 48, "width": 16, "height": 16 }, { "x": 48, "y": 48, "width": 16, "height": 16 }],
 		"arena": [ [32,6], [32,7], [32,8], [29,6], [29,7], [29,8], [35,6], [35,7], [35,8] ]
@@ -68,7 +68,7 @@
 
 	{
 		"title": "Hookshot",
-		"description": "Notice the green zones. These are <strong>Dead Zones</strong>. No cells will become alive in these zones, so you'll have to find a way to get around them. As a hint, see what happens when that <strong>Spaceship</strong> crashes into a wall... And remember, everything in the library can be rotated and flipped.",
+		"description": "Notice the red zones. These are <strong>Dead Zones</strong>. No cells will become alive in these zones, so you'll have to find a way to get around them.<br /><br />As a hint, see what happens when that <strong>Spaceship</strong> crashes into a wall...<br /><br />Also, remember that everything in the library can be rotated and flipped, and if you move something by a single tile, the outcome can be completely different.",
 		"goal": { "x": 3, "y": 20 },
 		"playables": [ { "x": 0, "y": 48, "width": 32, "height": 16 }, { "x": 56, "y": 26, "width": 8, "height": 8 } ],
 		"deadzones": [ { "x": 0, "y": 22, "width": 16, "height": 4 }, { "x": 48, "y": 22, "width": 16, "height": 4 } ],
@@ -77,7 +77,7 @@
 
 	{
 		"title": "Flock of Gliders",
-		"description": "This level can be beaten using the same method you beat the last leve.",
+		"description": "This level can be beaten using the same method you beat the last level.",
 		"goal": { "x": 59, "y": 4 },
 		"deadzones": [{"x":51,"y":2,"width":2,"height":5}],
 		"playables": [{"x":0,"y":0,"width":32,"height":16}],
@@ -96,7 +96,7 @@
 
 	{
 		"title": "Abaddon: Destroyer of Worlds",
-		"description": "Remember that <strong>Glider Gun</strong> you saw a while ago? Well, it's back! Unfortunately, there's an <strong>Eater</strong> preventing any gliders from hitting the goal.<br /><br />An <strong>Eater</strong>, when placed just right, will destroy a <strong>Glider</strong> and retain its shape.<br /><br />For them to work, a <strong>Glider</strong> needs to hit it at just the right angle. If the <strong>Eater</strong> oscillates, it needs to hit at the right frame of animation as well. Otherwise, if these strict conditions aren't met, it will be damaged or destroyed entirely.",
+		"description": "Remember that <strong>Glider Gun</strong> you saw a while ago? Well, it's back! Unfortunately, there's an <strong>Eater</strong> preventing any gliders from hitting the <strong>Goal</strong>.<br /><br />An <strong>Eater</strong>, when placed just right, will destroy a <strong>Glider</strong> and retain its shape.<br /><br />For them to work, a <strong>Glider</strong> needs to hit it at just the right angle. If the <strong>Eater</strong> oscillates, it needs to hit at the right frame of animation as well. Otherwise, if these strict conditions aren't met, it will be damaged or destroyed entirely.",
 		"introduce": [7],
 		"goal": { "x": 60, "y": 46 },
 		"deadzones": [],
@@ -106,7 +106,7 @@
 
 	{
 		"title": "Hey there Sparky!",
-		"description": "Whoa! Look at that giant slow-moving ship moving towards the goal! We call this thing <strong>Sparky</strong>.<br /><br />Unfortunately, it won't set off the goal, and will even serve to get in your way.<br /><br />Try to activate the goal even though that big thing is in your way!",
+		"description": "Whoa! Look at that giant slow-moving ship moving towards the <strong>Goal</strong>! We call this thing <strong>Sparky</strong>.<br /><br />Unfortunately, it won't set off the <strong>Goal</strong>, and will even serve to get in your way.<br /><br />Try to activate the <strong>Goal</strong> even though that big thing is in your way!",
 		"introduce": [8],
 		"goal": { "x": 1, "y": 27 },
 		"deadzones": [ { "x": 0, "y": 55, "width": 64, "height": 9 } ],
@@ -116,7 +116,7 @@
 
 	{
 		"title": "God Complex",
-		"description": "This simple construct is called <strong>Gliders by the Dozen</strong>. If you watch the pretty symmetical animation it plays, you'll soon find out where it gets its name from.<br /><br />Good luck activating the goal amidst all of the chaos!",
+		"description": "This simple construct is called <strong>Gliders by the Dozen</strong>. If you watch the pretty symmetical animation it plays, you'll soon find out where it gets its name from.<br /><br />Good luck activating the <strong>Goal</strong> amidst all of the chaos!",
 		"introduce": [9],
 		"goal": { "x": 32, "y": 30 },
 		"deadzones": [],
@@ -136,7 +136,7 @@
 
 	{
 		"title": "Orion's Belt",
-		"description": "This crazy three pronged spaceship is called an <strong>Orion 2</strong>, and is moving towards the upper left corner of the arena, which is where your playable zone is!<br /><br />Can you get past the ship and activate the goal?",
+		"description": "This crazy three pronged spaceship is called an <strong>Orion 2</strong>, and is moving towards the upper left corner of the arena, which is where your playable zone is!<br /><br />Can you get past the ship and activate the <strong>Goal</strong>?",
 		"introduce": [10],
 		"goal": { "x": 59, "y": 59 },
 		"deadzones": [ { "x": 4, "y": 48, "width": 12, "height": 12 }, { "x": 48, "y": 4, "width": 12, "height": 12 } ],
@@ -146,7 +146,7 @@
 
 	{
 		"title": "Many Hats",
-		"description": "Here is another level with a simple pattern in the middle, which goes through a bunch of chaos before stabilizing into some <strong>Oscillators</strong> and <strong>Still Lifes</strong>.<br /><br />And, would you look at that? There's a <strong>Dead Zone</strong> right outside of the playable area!<br /><br />Try to activate the goal even with these hassles in the way!",
+		"description": "Here is another level with a simple pattern in the middle, which goes through a bunch of chaos before stabilizing into some <strong>Oscillators</strong> and <strong>Still Lifes</strong>.<br /><br />And, would you look at that? There's a <strong>Dead Zone</strong> right outside of the playable area!<br /><br />Try to activate the <strong>Goal</strong> even with these hassles in the way!",
 		"goal": { "x": 28, "y": 39 },
 		"deadzones": [ { "x": 22, "y": 12, "width": 13, "height": 1 } ],
 		"playables": [ { "x": 22, "y": 0, "width": 13, "height": 12 } ],
@@ -154,7 +154,7 @@
 	},
 	{
 		"title": "<blink>&lt;blink&gt;blink&lt;/blink&gt;</blink>",
-		"description": "The backdrop of this level consists of a field of <strong>Blinkers</strong>, and the goal is surrounded by several <strong>Dead Zones</strong>.",
+		"description": "The backdrop of this level consists of a field of <strong>Blinkers</strong>, and the <strong>Goal</strong> is surrounded by several <strong>Dead Zones</strong>.",
 		"goal": { "x": 31, "y": 31 },
 		"deadzones": [ { "x": 25, "y": 25, "width": 3, "height": 3 }, { "x": 35, "y": 25, "width": 3, "height": 3 }, { "x": 25, "y": 35, "width": 3, "height": 3 }, { "x": 35, "y": 35, "width": 3, "height": 3 }, { "x": 30, "y": 41, "width": 3, "height": 3 } ],
 		"playables": [ { "x": 23, "y": 56, "width": 17, "height": 8 } ],
@@ -171,7 +171,7 @@
 
 	{
 		"title": "Round the Bend",
-		"description": "Other than a few <strong>Still Lifes</strong> protecting the goal, this isn't too interesting of a level. Unless, you consider, that there is no line of sight between you and the goal, and you may need to play off of two separate walls to reach the goal.<br /><br />Note: I have not beaten this level yet. If you can beat it, tweet a screenshot of your initial setup to @tlhunter.",
+		"description": "Other than a few <strong>Still Lifes</strong> protecting the <strong>Goal</strong>, this isn't too interesting of a level. Unless, you consider, that there is no line of sight between you and the <strong>Goal</strong>, and you may need to play off of two separate walls to reach the <strong>Goal</strong>.<br /><br />Note: I have not beaten this level yet. If you can beat it, tweet a screenshot of your initial setup to @tlhunter.",
 		"goal": { "x": 48, "y": 56 },
 		"deadzones": [ { "x": 31, "y": 31, "width": 4, "height": 33 } ],
 		"playables": [ { "x": 0, "y": 48, "width": 31, "height": 16 } ],
