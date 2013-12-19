@@ -133,7 +133,7 @@
 	{
 		"title": "Fanblades II",
 		"description": "This mission is a lot like a previous one, except that the playable area has changed quite a bit.<br /><br />Remember that unpredictable things can happen when two objects collide.",
-		"library": 5,
+		"library": 9,
 		"goal": { "x": 32, "y": 2 },
 		"playables": [{ "x": 0, "y": 48, "width": 16, "height": 16 }, { "x": 48, "y": 48, "width": 16, "height": 16 }],
 		"arena": [ [32,6], [32,7], [32,8], [29,6], [29,7], [29,8], [35,6], [35,7], [35,8] ]
