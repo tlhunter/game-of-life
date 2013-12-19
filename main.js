@@ -587,7 +587,7 @@ function god() {
 	//playables = [];
 	//deadzones = [];
 	//goal = {x:31,y:31};
-	arena = buildArena();
+	//arena = buildArena();
 	drawArena();
 	log("You have entered god mode. Refresh page to leave god mode.");
 
