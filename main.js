@@ -20,6 +20,11 @@ var generations_until_beaten = 0;
 var drawstate = null;
 var lastKnownHoverPos = {x:-1,y:-1};
 
+var godMode = false;
+var click_countdown = 0;
+var click_callback = null;
+var click_stack = [];
+
 var $play = null;
 var $stop = null;
 var $clear = null;
@@ -167,11 +172,29 @@ function init() {
 			if (!$prev.prop('disabled')) {
 				$prev.click();
 			}
+		} else if (event.charCode === 126) { // User pressed '~', specificially, SHIFT + BACKTICK
+			event.preventDefault();
+			stop();
+			god();
 		}
 	});
 
 	$gamefield.on('mousedown', function (event) {
 		var tile = eventPos(event);
+
+		if (click_countdown) {
+			click_countdown--;
+			click_stack.push(tile);
+
+			if (!click_countdown) {
+				click_callback();
+			} else {
+				log("You need to click " + click_countdown + " more times.");
+			}
+
+			return;
+		}
+
 		drawstate = !arena[tile.y][tile.x];
 		setTile(tile, drawstate)
 	});
@@ -182,6 +205,10 @@ function init() {
 			x: pos.x,
 			y: pos.y
 		};
+
+		if (click_countdown) {
+			return;
+		}
 
 		if (drawstate === null) {
 			return;
@@ -214,8 +241,16 @@ function setTile(tile, state) {
 		return;
 	}
 
-	if (!playables.length) {
+	if (!godMode && !playables.length) {
 		log("This level doesn't have any playable areas. Just click play!");
+		return;
+	}
+
+	if (godMode) {
+		if (state === undefined) state = !arena[tile.y][tile.x];
+		arena[tile.y][tile.x] = state;
+		log("Toggled [" + tile.x + ", " + tile.y + "].");
+		countPlayedPieces();
 		return;
 	}
 
@@ -544,18 +579,74 @@ function updateCellState(x, y, new_arena) {
 	}
 }
 
-// Makes hte whole level editable
+// Makes the whole level editable
 function god() {
-	playables = [{
-		x:0,
-		y:0,
-		width:CELLS_X,
-		height:CELLS_Y
-	}];
-
-	deadzones = [];
-
+	godMode = true;
+	$('#sandbox').show();
+	//current_level = 0;
+	//playables = [];
+	//deadzones = [];
+	//goal = {x:31,y:31};
+	arena = buildArena();
 	drawArena();
+	log("You have entered god mode. Refresh page to leave god mode.");
+
+	$('#sandbox #exporter').click(function() {
+		godExport();
+	});
+
+	$('#sandbox #del-all-cells').click(function() {
+		arena = buildArena();
+		log("Cleared all living cells");
+	});
+
+	$('#sandbox #del-playable').click(function() {
+		playables.pop();
+	});
+
+	$('#sandbox #del-dead').click(function() {
+		deadzones.pop();
+	});
+
+	$('#sandbox #set-goal').click(function() {
+		click_countdown = 1;
+		log("Click 1 time to set goal");
+		click_callback = function() {
+			goal = click_stack[0];
+			click_stack = [];
+			log("Goal has been set.");
+		};
+	});
+
+	$('#sandbox #add-playable').click(function() {
+		click_countdown = 2;
+		log("Click two times to set this zone. Click in two opposing corners.");
+		click_callback = function() {
+			playables.push({
+				x: Math.min(click_stack[0].x, click_stack[1].x),
+				y: Math.min(click_stack[0].y, click_stack[1].y),
+				width: Math.max(click_stack[0].x, click_stack[1].x) - Math.min(click_stack[0].x, click_stack[1].x) + 1,
+				height: Math.max(click_stack[0].y, click_stack[1].y) - Math.min(click_stack[0].y, click_stack[1].y) + 1
+			});
+			click_stack = [];
+			log("Playable has been set.");
+		};
+	});
+
+	$('#sandbox #add-dead').click(function() {
+		click_countdown = 2;
+		log("Click two times to set this zone. Click in two opposing corners.");
+		click_callback = function() {
+			deadzones.push({
+				x: Math.min(click_stack[0].x, click_stack[1].x),
+				y: Math.min(click_stack[0].y, click_stack[1].y),
+				width: Math.max(click_stack[0].x, click_stack[1].x) - Math.min(click_stack[0].x, click_stack[1].x) + 1,
+				height: Math.max(click_stack[0].y, click_stack[1].y) - Math.min(click_stack[0].y, click_stack[1].y) + 1
+			});
+			click_stack = [];
+			log("Deadzone has been set.");
+		};
+	});
 }
 
 // Creates some JSON you can paste into the levels.json file
@@ -570,14 +661,18 @@ function godExport() {
 		}
 	}
 
-	console.log(JSON.stringify({
+	var data = (JSON.stringify({
 		title: "TITLE",
 		description: "DESC",
 		goal: goal,
 		deadzones: deadzones,
 		playables: playables,
 		arena: pointsInExportFormat
-	}, null, "  "));
+	}));
+
+	$('#description .text').html('<textarea>' + data + '</textarea>');
+	
+	log("This is the data you need for levels.json.");
 }
 
 // Log a message to the on-screen console
