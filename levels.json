@@ -52,20 +52,11 @@
 	},
 
 	{
-		"title": "First Real Mission",
-		"description": "Alright, it's time for your first real mission! Try to tear your way through the barrier and get to the <strong>Goal</strong>!",
+		"title": "Fanblades I",
+		"description": "Alright, it's time for your first real mission! Try to tear your way through the barrier and get to the <strong>Goal</strong>!<br /><br />If your first attempt fails, remember that you can move something you build by a single tile, and the outcome can be completely different.",
 		"library": 5,
 		"goal": { "x": 32, "y": 2 },
 		"playables": [{ "x": 24, "y": 48, "width": 16, "height": 16 }],
-		"arena": [ [32,6], [32,7], [32,8], [29,6], [29,7], [29,8], [35,6], [35,7], [35,8] ]
-	},
-
-	{
-		"title": "Second Real Mission",
-		"description": "This mission is a lot like the last one, except that the playable area has changed quite a bit.<br /><br />Remember that unpredictable things can happen when two objects collide.",
-		"library": 5,
-		"goal": { "x": 32, "y": 2 },
-		"playables": [{ "x": 0, "y": 48, "width": 16, "height": 16 }, { "x": 48, "y": 48, "width": 16, "height": 16 }],
 		"arena": [ [32,6], [32,7], [32,8], [29,6], [29,7], [29,8], [35,6], [35,7], [35,8] ]
 	},
 
@@ -74,9 +65,9 @@
 		"description": "Notice the red zones. These are <strong>Dead Zones</strong>. No cells will become alive in these zones, so you'll have to find a way to get around them.<br /><br />As a hint, see what happens when that <strong>Spaceship</strong> crashes into a wall...<br /><br />Also, remember that everything in the library can be rotated and flipped, and if you move something by a single tile, the outcome can be completely different.",
 		"library": 5,
 		"goal": { "x": 3, "y": 20 },
-		"playables": [ { "x": 0, "y": 48, "width": 32, "height": 16 }, { "x": 56, "y": 26, "width": 8, "height": 8 } ],
+		"playables": [ { "x": 0, "y": 48, "width": 32, "height": 16 } ],
 		"deadzones": [ { "x": 0, "y": 22, "width": 16, "height": 4 }, { "x": 48, "y": 22, "width": 16, "height": 4 } ],
-		"arena": [[57,27],[60,27],[56,28],[56,29],[60,29],[56,30],[57,30],[58,30],[59,30]] 
+		"arena": [[56,27],[59,27],[55,28],[55,29],[59,29],[55,30],[56,30],[57,30],[58,30]] 
 	},
 
 	{
@@ -137,6 +128,15 @@
 		"deadzones": [ { "x": 8, "y": 8, "width": 2, "height": 2 }, { "x": 8, "y": 54, "width": 2, "height": 2 }, { "x": 54, "y": 8, "width": 2, "height": 2 }, { "x": 54, "y": 54, "width": 2, "height": 2 } ],
 		"playables": [ { "x": 0, "y": 0, "width": 8, "height": 8 }, { "x": 0, "y": 56, "width": 8, "height": 8 }, { "x": 56, "y": 0, "width": 8, "height": 8 }, { "x": 56, "y": 56, "width": 8, "height": 8 } ],
 		"arena": [ [ 30, 29 ], [ 31, 29 ], [ 34, 29 ], [ 30, 30 ], [ 34, 30 ], [ 30, 31 ], [ 33, 31 ], [ 34, 31 ] ]
+	},
+
+	{
+		"title": "Fanblades II",
+		"description": "This mission is a lot like a previous one, except that the playable area has changed quite a bit.<br /><br />Remember that unpredictable things can happen when two objects collide.",
+		"library": 5,
+		"goal": { "x": 32, "y": 2 },
+		"playables": [{ "x": 0, "y": 48, "width": 16, "height": 16 }, { "x": 48, "y": 48, "width": 16, "height": 16 }],
+		"arena": [ [32,6], [32,7], [32,8], [29,6], [29,7], [29,8], [35,6], [35,7], [35,8] ]
 	},
 
 	{
