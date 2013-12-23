@@ -77,29 +77,7 @@ var levels = [];
 var stars = [];
 
 var render = function() {
-	starfieldContext.fillStyle = colors.abyss; // the slight transparency leaves a trail
-	starfieldContext.fillRect(0, 0, GAMEFIELD_WIDTH, GAMEFIELD_HEIGHT);
-
-	if (Math.random() < 0.7) {
-		stars.push({
-			x: Math.floor(Math.random() * GAMEFIELD_WIDTH),
-			y: 0,
-			speed: Math.random() * 5 + 2,
-			color: colors.stars[Math.floor(Math.random() * colors.stars.length)]
-		});
-	}
-
-	var star = null;
-	for (var index in stars) {
-		star = stars[index];
-		starfieldContext.fillStyle = star.color;
-		starfieldContext.fillRect(star.x, star.y, 1, 1);
-		star.y += star.speed;
-		if (star.y >= GAMEFIELD_HEIGHT) {
-			stars.splice(index, 1);
-		}
-	}
-
+	drawStars();
 	drawArena();
 }
 
@@ -520,6 +498,52 @@ function drawArena() {
 	for (var i = 0; i < CELLS_Y; i++) {
 		context.fillRect( 0, i * TILE_HEIGHT, TILE_HEIGHT * CELLS_Y, 1);
 	}
+}
+
+function drawStars() {
+	starfieldContext.fillStyle = colors.abyss; // the slight transparency leaves a trail
+	starfieldContext.fillRect(0, 0, GAMEFIELD_WIDTH, GAMEFIELD_HEIGHT);
+
+	if (Math.random() < 0.7) {
+		var speed = Math.random();
+		var radius = 1;
+
+		if (speed > 0.995) {
+			radius = 5;
+			speed *= 2;
+		} else if (speed > 0.95) {
+			radius = 3;
+		} else if (speed > 0.9) {
+			radius = 2;
+		}
+
+		stars.push({
+			x: Math.floor(Math.random() * GAMEFIELD_WIDTH),
+			y: 0,
+			speed: speed * 5 + 0.5,
+			color: colors.stars[Math.floor(Math.random() * colors.stars.length)],
+			radius: radius
+		});
+	}
+
+	var star = null;
+	for (var index in stars) {
+		star = stars[index];
+		starfieldContext.fillStyle = star.color;
+		if (star.radius <= 2) { // If they're small, just use a square
+			starfieldContext.fillRect(star.x, star.y, star.radius, star.radius);
+		} else { // If they're huge, use a circle (slower I'm assuming)
+			starfieldContext.beginPath();
+			starfieldContext.arc(star.x, star.y, star.radius, 0, Math.PI*2, true);
+			starfieldContext.closePath();
+			starfieldContext.fill();
+		}
+		star.y += star.speed;
+		if (star.y >= GAMEFIELD_HEIGHT) {
+			stars.splice(index, 1);
+		}
+	}
+
 }
 
 // Draw each new generation
