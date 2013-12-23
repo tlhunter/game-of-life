@@ -22,10 +22,14 @@ body {
 	cursor: none;
 }
 #gamefield,
+#gridfield,
 #starfield {
 	position: absolute;
 	top: 4px;
 	left: 4px;
+}
+#starfield {
+	background-color: #000;
 }
 
 #main-wrapper {

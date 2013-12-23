@@ -12,8 +12,9 @@ var goalPhase = 0;
 var $generation = null;
 var arena = buildArena();
 var arena_init = null;
-var context = null;
-var starfieldContext = null;
+var gamefield = null;
+var starfield = null;
+var gridfield = null;
 var redraw = null;
 var playing = false;
 var generations_until_beaten = 0;
@@ -90,6 +91,7 @@ $(function() {
 			localStorage.level = current_level;
 		}
 		setupdom();
+		drawGrid();
 		loadLevel(current_level);
 		init();
 		animloop();
@@ -112,11 +114,9 @@ function setupdom() {
 	$piece_count = $('#piececount span');
 	$gamefield = $('#gamefield');
 
-	var gamefield = document.getElementById('gamefield');
-	context = gamefield.getContext('2d');
-
-	var starfield = document.getElementById('starfield');
-	starfieldContext = starfield.getContext('2d');
+	gamefield = document.getElementById('gamefield').getContext('2d');
+	starfield = document.getElementById('starfield').getContext('2d');
+	gridfield = document.getElementById('gridfield').getContext('2d');
 }
 
 function init() {
@@ -444,12 +444,12 @@ function buildArena() {
 // Draws the entire current level
 function drawArena() {
 	// MAKE EVERYTHING TRANSPARENT
-	context.clearRect(0, 0, GAMEFIELD_WIDTH, GAMEFIELD_HEIGHT);
+	gamefield.clearRect(0, 0, GAMEFIELD_WIDTH, GAMEFIELD_HEIGHT);
 
 	// DRAW PLAYABLE ZONES
-	context.fillStyle = colors.playable;
+	gamefield.fillStyle = colors.playable;
 	for (var i in playables) {
-		context.fillRect(
+		gamefield.fillRect(
 			playables[i].x * TILE_WIDTH,
 			playables[i].y * TILE_HEIGHT,
 			playables[i].width * TILE_WIDTH,
@@ -458,9 +458,9 @@ function drawArena() {
 	}
 
 	// DRAW DEAD ZONES
-	context.fillStyle = colors.deadzone;
+	gamefield.fillStyle = colors.deadzone;
 	for (var i in deadzones) {
-		context.fillRect(
+		gamefield.fillRect(
 			deadzones[i].x * TILE_WIDTH,
 			deadzones[i].y * TILE_HEIGHT,
 			deadzones[i].width * TILE_WIDTH,
@@ -469,40 +469,30 @@ function drawArena() {
 	}
 
 	// DRAW LIVING CELLS
-	context.fillStyle = colors.alive;
+	gamefield.fillStyle = colors.alive;
 	for (var y = 0; y < CELLS_Y; y++) {
 		for (var x = 0; x < CELLS_X; x++) {
 			if (arena[y][x]) {
-				context.fillRect(x * TILE_WIDTH, y * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
+				gamefield.fillRect(x * TILE_WIDTH, y * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
 			}
 		}
 	}
 
 	// DRAW GOAL
-	context.fillStyle = 'hsla(' + Math.floor((Math.sin(goalPhase++/10)+1)/2*255) + ',50%,50%,0.75)'; // fade between 0.5 and 1 opacity
-	context.fillRect(goal.x * TILE_WIDTH, goal.y * TILE_HEIGHT, 1 * TILE_WIDTH, 1 * TILE_HEIGHT);
+	gamefield.fillStyle = 'hsla(' + Math.floor((Math.sin(goalPhase++/10)+1)/2*255) + ',50%,50%,0.75)'; // fade between 0.5 and 1 opacity
+	gamefield.fillRect(goal.x * TILE_WIDTH, goal.y * TILE_HEIGHT, 1 * TILE_WIDTH, 1 * TILE_HEIGHT);
 	if (goalPhase >= 255) {
 		goalPhase = 0;
 	}
 
 	// DRAW HOVER
-	context.fillStyle = colors.hover;
-	context.fillRect(lastKnownHoverPos.x * TILE_WIDTH, lastKnownHoverPos.y * TILE_HEIGHT, 1 * TILE_WIDTH, 1 * TILE_HEIGHT);
-
-	// DRAW GRID
-	context.fillStyle = colors.grid;
-	for (var i = 0; i < CELLS_X; i++) {
-		context.fillRect( i * TILE_WIDTH, 0, 1, TILE_WIDTH * CELLS_X);
-	}
-
-	for (var i = 0; i < CELLS_Y; i++) {
-		context.fillRect( 0, i * TILE_HEIGHT, TILE_HEIGHT * CELLS_Y, 1);
-	}
+	gamefield.fillStyle = colors.hover;
+	gamefield.fillRect(lastKnownHoverPos.x * TILE_WIDTH, lastKnownHoverPos.y * TILE_HEIGHT, 1 * TILE_WIDTH, 1 * TILE_HEIGHT);
 }
 
 function drawStars() {
-	starfieldContext.fillStyle = colors.abyss; // the slight transparency leaves a trail
-	starfieldContext.fillRect(0, 0, GAMEFIELD_WIDTH, GAMEFIELD_HEIGHT);
+	starfield.fillStyle = colors.abyss; // the slight transparency leaves a trail
+	starfield.fillRect(0, 0, GAMEFIELD_WIDTH, GAMEFIELD_HEIGHT);
 
 	if (Math.random() < 0.7) {
 		var speed = Math.random();
@@ -529,14 +519,14 @@ function drawStars() {
 	var star = null;
 	for (var index in stars) {
 		star = stars[index];
-		starfieldContext.fillStyle = star.color;
+		starfield.fillStyle = star.color;
 		if (star.radius <= 2) { // If they're small, just use a square
-			starfieldContext.fillRect(star.x, star.y, star.radius, star.radius);
+			starfield.fillRect(star.x, star.y, star.radius, star.radius);
 		} else { // If they're huge, use a circle (slower I'm assuming)
-			starfieldContext.beginPath();
-			starfieldContext.arc(star.x, star.y, star.radius, 0, Math.PI*2, true);
-			starfieldContext.closePath();
-			starfieldContext.fill();
+			starfield.beginPath();
+			starfield.arc(star.x, star.y, star.radius, 0, Math.PI*2, true);
+			starfield.closePath();
+			starfield.fill();
 		}
 		star.y += star.speed;
 		if (star.y >= GAMEFIELD_HEIGHT) {
@@ -544,6 +534,17 @@ function drawStars() {
 		}
 	}
 
+}
+
+drawGrid = function() {
+	gridfield.fillStyle = colors.grid;
+	for (var i = 0; i < CELLS_X; i++) {
+		gridfield.fillRect( i * TILE_WIDTH, 0, 1, TILE_WIDTH * CELLS_X);
+	}
+
+	for (var i = 0; i < CELLS_Y; i++) {
+		gridfield.fillRect( 0, i * TILE_HEIGHT, TILE_HEIGHT * CELLS_Y, 1);
+	}
 }
 
 // Draw each new generation
