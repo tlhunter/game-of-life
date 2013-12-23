@@ -62,7 +62,7 @@ if (typeof localStorage.level != 'undefined') {
 	current_level = parseInt(localStorage.level, 10);
 	if (isNaN(current_level)) {
 		current_level = 0;
-	localStorage.level = 0;
+		localStorage.level = 0;
 	}
 } else {
 	localStorage.level = 0;
@@ -106,6 +106,11 @@ var render = function() {
 $(function() {
 	$.getJSON('./levels.json', function(data) {
 		levels = data;
+		if (levels.length <= current_level) {
+			console.log("Your supposed completed level is too high!");
+			current_level = levels.length - 1;
+			localStorage.level = current_level;
+		}
 		setupdom();
 		loadLevel(current_level);
 		init();
